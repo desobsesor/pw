@@ -1,0 +1,40 @@
+     
+<div  ng-app="MainAppFaq" ng-controller="mainControllerFaq" >
+    <section id="faqs" class="container">
+        <br>
+        <div class="col-sm-5 col-sm-offset-1">
+            <ul class="faq unstyled"  ng-repeat="faq in faqs" ng-click="selectFaq(faq)">
+                <li>
+                    <span class="number" style="font-size: 1.2rem; width: 80px; margin-right: 10px;">{{ faq.fecha.substring(0,10)}}</span>
+                    <div>
+                        <h4>{{ faq.titulo}}</h4>
+                        <p>{{ faq.descripcion}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1 text-center">
+            <br>
+            <h4>Nueva FAQ</h4>
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="mainFaqForm" class="contact-form" name="mainFaqForm" role="form">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Titulo" ng-model="newFaq.titulo" >
+                        </div>
+                        <div class="form-group">
+                               <button type="submit" class="btn btn-success btn-lg" ng-click="registrarFaq()" ng-disabled="myForm.$invalid || selected">Guardar</button>
+                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarFaq(newFaq)" ng-disabled="!newFaq.titulo || !newFaq.descripcion || !selected">Modificar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarFaq(newFaq)" ng-disabled="!newFaq.titulo || !newFaq.descripcion || !selected">Borrar</button>
+             </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <textarea name="descripcion" id="descripcion" required="required" class="form-control" rows="8" placeholder="descripcion"  ng-model="newFaq.descripcion" ></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<!--#faqs-->

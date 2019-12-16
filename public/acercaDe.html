@@ -1,0 +1,309 @@
+<section id="about-us" style="background-color:#FFFFFF;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Quienes Somos</h2>
+            </div>
+            <!--/.col-sm-6-->
+            <div class="col-sm-6">
+                <h2>Miembros de la casa</h2>
+                <div ng-app="MainAppAliado" ng-controller="mainControllerAliado">
+                    <div class="progress" ng-repeat="aliado in aliados">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="width: 90%; text-align: left; padding-left: 10px;">
+                            <span style="font-size: 12px;"><strong>{{ aliado.nombre}}</strong></span> Dirección:<span>{{aliado.direccion}}<strong>,
+                                    Tel:{{aliado.telefono}}</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-sm-6-->
+        </div>
+        <!--/.row-->
+
+        <div class="gap"></div>
+        <h1 class="center">Nuestra casa</h1>
+        <p class="lead center">Somos una casa de desarrollo creada para ayudar en el crecimiento tecnologico del departamento y del
+            pais</p>
+        <div class="gap"></div>
+
+        <div id="meet-the-team" class="row">
+
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="./public/images/miembro5.jpg" alt="">
+                    </p>
+                    <h5>Yovany Suárez Silva<small class="designation muted">Miembro activo de la casa</small></h5>
+                    <p></p>
+                    <a class="btn btn-social btn-facebook" style="height:63px;" href="#"> <i
+                            class="fa fa-facebook fa-3x "></i></a>
+                    <a class="btn btn-social btn-google-plus" style="height:63px;" href="#"> <i
+                            class="fa fa-google-plus fa-3x "></i></a>
+                    <a class="btn btn-social btn-twitter" style="height:63px;" href="#"><i
+                            class="fa fa-twitter fa-3x "></i></a>
+                    <a class="btn btn-social btn-linkedin" style="height:63px;" href="#"><i
+                            class="fa fa-linkedin fa-3x "></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="./public/images/miembro4.jpg" alt="">
+                    </p>
+                    <h5>Yovany Suárez Silva<small class="designation muted">Miembro activo de la casa</small></h5>
+                    <p></p>
+                    <a class="btn btn-social btn-facebook" style="height:65px;" target="_blank"
+                       href="#"><i class="icon-facebook"></i></a>
+                    <a class="btn btn-social btn-google-plus" style="height:65px;" href="#"><i
+                            class="icon-google-plus"></i></a>
+                    <a class="btn btn-social btn-twitter" style="height:65px;" href="#"><i class="icon-twitter"></i></a>
+                    <a class="btn btn-social btn-linkedin" style="height:65px;" href="#"><i
+                            class="icon-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="./public/images/miembro3.jpg" alt="">
+                    </p>
+                    <h5>Yovany Suárez Silva<small class="designation muted">Miembro activo de la casa</small></h5>
+                    <p></p>
+                    <a class="btn btn-social btn-facebook" style="height:65px;" href="#"><i
+                            class="icon-facebook"></i></a>
+                    <a class="btn btn-social btn-google-plus" style="height:65px;" href="#"><i
+                            class="icon-google-plus"></i></a>
+                    <a class="btn btn-social btn-twitter" style="height:65px;" href="#"><i class="icon-twitter"></i></a>
+                    <a class="btn btn-social btn-linkedin" style="height:65px;" href="#"><i
+                            class="icon-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+                <div class="center">
+                    <p><img class="img-responsive img-thumbnail img-circle" src="./public/images/miembro2.jpg" alt="">
+                    </p>
+                    <h5>Yovany Suárez Silva<small class="designation muted">Miembro activo de la casa</small></h5>
+                    <p></p>
+                    <a class="btn btn-social btn-facebook" style="height:65px;" href="#"><i
+                            class="icon-facebook"></i></a>
+                    <a class="btn btn-social btn-google-plus" style="height:65px;" href="#"><i
+                            class="icon-google-plus"></i></a>
+                    <a class="btn btn-social btn-twitter" style="height:65px;" href="#"><i class="icon-twitter"></i></a>
+                    <a class="btn btn-social btn-linkedin" style="height:65px;" href="#"><i
+                            class="icon-linkedin"></i></a>
+                </div>
+            </div>
+
+        </div>
+        <!--/#meet-the-team-->
+
+        <div class="authoring-table-view socrata-visualization-renderer socrata-paginated-table">
+            <div class="socrata-visualization">
+                <div class="socrata-visualization-container loaded" aria-hidden="true">
+                    <div class="socrata-table frozen-columns">
+                        <h2>TECNOLOGIAS Y HERRAMIENTAS UTILES</h2>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 120px;">
+                                    <div class="column-header-content" data-column-name="item"
+                                         data-column-description="" data-column-render-type="number">
+
+                                            <span class="column-header-content-column-name">
+                                                TECNOLOGIA O HERRAMIENTA
+                                            </span>
+                                        <span class="sort-controls-container">
+                                                <span class="socrata-icon-arrow-up2 sort-indicator"></span>
+                                                <button class="sort-menu-button"><span
+                                                        class="socrata-icon-kebab"></span></button>
+                                            </span>
+                                    </div>
+
+                                    <div class="column-resize-target" data-column-name="item">
+                                    </div>
+
+                                </th>
+
+                                <th scope="col" style="width: 180px;">
+                                    <div class="column-header-content" data-column-name="municipio"
+                                         data-column-description="" data-column-render-type="text">
+
+                                            <span class="column-header-content-column-name">
+                                                DESCRIPCIÓN
+                                            </span>
+                                        <span class="sort-controls-container">
+                                                <span class="socrata-icon-arrow-up2 sort-indicator"></span>
+                                                <button class="sort-menu-button"><span
+                                                        class="socrata-icon-kebab"></span></button>
+                                            </span>
+                                    </div>
+
+                                    <div class="column-resize-target" data-column-name="municipio">
+                                    </div>
+
+                                </th>
+
+                                <th scope="col" style="width: 118px;">
+                                    <div class="column-header-content" data-column-name="nombre_de_la_organizaci_n"
+                                         data-column-description="" data-column-render-type="text">
+
+                                            <span class="column-header-content-column-name">
+                                                EMPRESA
+                                            </span>
+                                        <span class="sort-controls-container">
+                                                <span class="socrata-icon-arrow-up2 sort-indicator"></span>
+                                                <button class="sort-menu-button"><span
+                                                        class="socrata-icon-kebab"></span></button>
+                                            </span>
+                                    </div>
+
+                                    <div class="column-resize-target" data-column-name="nombre_de_la_organizaci_n">
+                                    </div>
+
+                                </th>
+
+                                <th scope="col" style="width: 80px;">
+                                    <div class="column-header-content" data-column-name="representante_legal"
+                                         data-column-description="" data-column-render-type="text">
+
+                                            <span class="column-header-content-column-name">
+                                                AÑO DE INICIO
+                                            </span>
+                                        <span class="sort-controls-container">
+                                                <span class="socrata-icon-arrow-up2 sort-indicator"></span>
+                                                <button class="sort-menu-button"><span
+                                                        class="socrata-icon-kebab"></span></button>
+                                            </span>
+                                    </div>
+
+                                    <div class="column-resize-target" data-column-name="representante_legal">
+                                    </div>
+
+                                </th>
+
+                                <th scope="col" style="width: 100px;">
+                                    <div class="column-header-content" data-column-name="numero_de_socios"
+                                         data-column-description="" data-column-render-type="number">
+
+                                            <span class="column-header-content-column-name">
+                                                CONOCIMIENTO DE LA TECNOLOGÍA
+                                            </span>
+                                        <span class="sort-controls-container">
+                                                <span class="socrata-icon-arrow-up2 sort-indicator"></span>
+                                                <button class="sort-menu-button"><span
+                                                        class="socrata-icon-kebab"></span></button>
+                                            </span>
+                                    </div>
+
+                                    <div class="column-resize-target column-resize-target-last"
+                                         data-column-name="numero_de_socios">
+                                    </div>
+
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-row-id="null" style="">
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+                                        AngularJS
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-row-id="null" style="">
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+                                        Angular 6,7,8
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr data-row-id="null" style="">
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+                                        Zeplin
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="text" data-cell-alignment="left">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+
+                                <td data-cell-render-type="number" data-cell-alignment="right">
+                                    <div>
+                                        ...
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#about-us-->

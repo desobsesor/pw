@@ -1,0 +1,42 @@
+
+<section id="title">
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Portafolio de Servicios</h1>
+                <p>SEAN te brinda los siguientes servicios para el bienestar de tu mascota.</p>
+            </div>
+            <div class="col-sm-6">
+                <ul class="breadcrumb pull-right">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="active">Portafolio</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section><!--/#title--> 
+
+<section id="portfolio" class="container">
+    <ul class="portfolio-filter">
+        <li><a class="btn btn-default active" href="#" data-filter="*">Todos</a></li>
+        <li><a class="btn btn-default" href="#" data-filter=".enlinea">En Linea</a></li>
+        <li><a class="btn btn-default" href="#" data-filter=".medicos">Medicos</a></li>
+        <li><a class="btn btn-default" href="#" data-filter=".ventas">Ventas</a></li>
+        <li><a class="btn btn-default" href="#" data-filter=".seguridad">Seguridad</a></li>
+        <li><a class="btn btn-default" href="#" data-filter=".domicilio">Domicilio</a></li>
+    </ul><!--/#portfolio-filter-->
+
+    <ul class="portfolio-items col-3">
+        <li class="portfolio-item apps" ng-repeat="servicio in servicios" >
+            <div class="item-inner">
+                <img src="./public/files/{{ servicio.imagen}}" alt="">
+                <h5>{{ servicio.servicio}}<br><span style="font-size: 1.0rem; text-align: right; font-style: italic; color: gray;">{{ servicio.descripcion}}</span></h5>
+                <div class="overlay">
+                    <a class="preview btn btn-danger" href="./public/images/portfolio/full/item1.jpg" rel="prettyPhoto"><i class="icon-eye-open"></i></a>             
+                </div>           
+            </div>           
+        </li><!--/.portfolio-item-->
+    </ul>
+</section><!--/#portfolio-->
+

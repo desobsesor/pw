@@ -1,0 +1,108 @@
+<div  ng-app="MainAppUsuario" ng-controller="mainControllerUsuario"  >
+    <section id="title" class="emerald">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>Usuarios</h1>
+                    <p>Usuarios registrados al sistema Veterinaria.!</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li class="active">Usuarioenos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#title-->   
+    <section id="contact-page" class="container" >
+        <div class="col-sm-6 col-sm-offset-1">
+            <table id="tablaUsuarios" class="table" style="width: 900px;">
+                <thead>
+                    <tr class="alert">
+                        <th style="width: 10%;">Foto</th>
+                        <th style="width: 10%;">Usuario</th>
+                        <th style="width: 10%;">Documento</th>
+                        <th style="width: 10%;">Nombre</th>
+                        <th style="width: 10%;">Apellidos</th>
+                        <th style="width: 10%;">Sexo</th>
+                        <th style="width: 20%;">Direccion</th>
+                        <th style="width: 10%;">Email</th>
+                        <th style="width: 10%;">Telefono</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr ng-repeat="usuario in usuarios" ng-click="selectUsuario(usuario)">
+                        <td style="width: 10%;">{{ usuario.imagen}}</td>
+                        <td style="width: 10%;">{{ usuario.usuario}}</td>
+                        <td style="width: 10%;">{{ usuario.documento}}</td>
+                        <td style="width: 10%;">{{ usuario.nombre}}</td>
+                        <td style="width: 10%;">{{ usuario.apellidos}}</td>
+                        <td style="width: 10%;">{{ usuario.sexo.sexo}}</td>
+                        <td style="width: 20%;">{{ usuario.direccion}}</td>
+                        <td style="width: 10%;">{{ usuario.email}}</td>		               
+                        <td style="width: 10%;">{{ usuario.telefono}}</td>		
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 col-sm-offset-1 text-center">
+            <h4>Formulario de Usuario</h4>
+            <div class="status alert alert-success" style="display: none"></div>
+            <form id="mainUsuarioForm" class="contact-form" name="mainUsuarioForm" role="form">
+                <div class="row">
+                    <div class="col-sm-5">                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Usuario" ng-model="newUsuario.usuario" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Password" ng-model="newUsuario.passwordHash" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Nombre" ng-model="newUsuario.nombre" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Apellidos" ng-model="newUsuario.apellidos" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Documento" ng-model="newUsuario.documento" >
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg"   ng-click="registrarUsuario()" ng-disabled="mainUsuarioForm.$invalid || selected">Guardar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">  
+                        <div class="form-group">
+                            <select id="modelListBox" class="form-control" required="required"
+                                    ng-model="newUsuario.sexo"
+                                    ng-options="model.sexo for model in sexos">
+                            </select>
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Sexo" ng-model="newUsuario.sexo" >
+                        </div>-->
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Email"  ng-model="newUsuario.email" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Telefono"  ng-model="newUsuario.telefono" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" required="required" placeholder="Direccion"  ng-model="newUsuario.direccion" >
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarUsuario(newUsuario)" ng-disabled="!newUsuario.usuario || !newUsuario.nombre || !selected">Modificar</button>
+                            <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarUsuario(newUsuario)" ng-disabled="!newUsuario.usuario || !newUsuario.nombre || !selected">Borrar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </section><!--/#contact-page-->
+</div>

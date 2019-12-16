@@ -1,0 +1,1057 @@
+<div ng-app="MainAppJugador" ng-controller="mainControllerJugador" ng-init="ajustarTabla('tablaItemsLicors', 190);">
+    <style>
+        .glyphicon {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        small {
+            display: block;
+            line-height: 1.428571429;
+            color: #999;
+        }
+
+        p.item {
+            font-size: 18px;
+            font-weight: lighter;
+            font-style: normal;
+            color: rgb(62, 62, 62);
+            margin: 18px;
+            text-align: left;
+        }
+
+        ul.item {
+            float: left;
+            border-radius: 5px;
+            /*border: solid 1px rgb(198, 198, 198);*/
+            padding: 7px 11px;
+            background-color: rgb(248,248,248);
+            text-align: left;
+        }
+
+        li.item {
+            float: left;
+            background-color: #428bca;
+            padding: 5px 19px;
+            margin: 5px 2px 5px 0px;
+            color: black;
+            list-style: none;
+            text-align: left;
+        }
+
+            li.item:hover, li.item:hover a {
+                background-color: rgb(6,179,6);
+                color: white;
+            }
+
+            li.item a {
+                text-decoration: none;
+                color: white;
+                font-size: 21px;
+                font-style: normal;
+                text-shadow: 1px 0px 3px rgb(157, 157, 157);
+            }
+
+            li.item:nth-child(1) {
+                border-radius: 4px 0px 0px 4px;
+                margin-left: 1px;
+            }
+
+            li.item:nth-child(3) {
+                border-radius: 0px 4px 4px 0px;
+            }
+
+        .actives {
+            background-color: rgb(6,179,6);
+        }
+
+        table {
+            background-color: #FFF;
+            color: #333;
+            font-family: sans-serif;
+            font-size: .8em;
+            font-weight: 300;
+            text-align: left;
+            line-height: 40px;
+            border-spacing: 0;
+            border: 1px solid #428bca;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        thead tr:first-child {
+            background: #428bca;
+            color: #fff;
+            border: none;
+        }
+
+        th {
+            font-weight: bold;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+            th:first-child,
+            td:first-child {
+                padding: 0 15px 0 20px;
+            }
+
+        thead tr:last-child th {
+            border-bottom: 2px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f0fbff;
+        }
+
+        tbody tr:last-child td {
+            border: none;
+        }
+
+        tbody td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        td:last-child {
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        button {
+            position: relative;
+            vertical-align: top;
+            height: 60px;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            background: #3498db;
+            border: 0;
+            border-bottom: 2px solid #2a8bcc;
+            cursor: pointer;
+            -webkit-box-shadow: inset 0 -2px #2a8bcc;
+            box-shadow: inset 0 -2px #2a8bcc;
+        }
+
+            button:active {
+                top: 1px;
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            button:disabled {
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                opacity: 0.5;
+            }
+
+        #tablaItemsLicors a {
+            color: white;
+            text-transform: uppercase !important;
+        }
+
+        .context-menu {
+            position: absolute;
+            display: none;
+        }
+
+        .context-active {
+            display: block;
+            position: absolute;
+        }
+        /**/
+        .square, .btn {
+            border-radius: 0px !important;
+        }
+
+        /* -- color classes -- */
+        .coralbg {
+            background-color: #FA396F;
+        }
+
+        .coral {
+            color: #FA396f;
+        }
+
+        .turqbg {
+            background-color: #46D8D2;
+        }
+
+        .turq {
+            color: #46D8D2;
+        }
+
+        .white {
+            color: #fff !important;
+        }
+
+        /* -- The "User's Menu Container" specific elements. Custom container for the snippet -- */
+        div.user-menu-container {
+            z-index: 10;
+            background-color: #fff;
+            margin-top: 20px;
+            background-clip: padding-box;
+            opacity: 0.97;
+            filter: alpha(opacity=97);
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+        }
+
+            div.user-menu-container .btn-lg {
+                padding: 0px 12px;
+            }
+
+            div.user-menu-container h4 {
+                font-weight: 300;
+                color: #8b8b8b;
+            }
+
+            div.user-menu-container a, div.user-menu-container .btn {
+                transition: 1s ease;
+            }
+
+            div.user-menu-container .thumbnail {
+                width: 100%;
+                min-height: 200px;
+                border: 0px !important;
+                padding: 0px;
+                border-radius: 0;
+                border: 0px !important;
+            }
+
+            /* -- Vertical Button Group -- */
+            div.user-menu-container .btn-group-vertical {
+                display: block;
+            }
+
+                div.user-menu-container .btn-group-vertical > a {
+                    padding: 20px 25px;
+                    background-color: #46D8D2;
+                    color: white;
+                    border-color: #fff;
+                }
+
+        div.btn-group-vertical > a:hover {
+            color: white;
+            border-color: white;
+        }
+
+        div.btn-group-vertical > a.active {
+            background: #FA396F;
+            box-shadow: none;
+            color: white;
+        }
+        /* -- Individual button styles of vertical btn group -- */
+        div.user-menu-btns {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+
+            div.user-menu-btns div.btn-group-vertical > a.active:after {
+                content: '';
+                position: absolute;
+                left: 100%;
+                top: 50%;
+                margin-top: -13px;
+                border-left: 0;
+                border-bottom: 13px solid transparent;
+                border-top: 13px solid transparent;
+                border-left: 10px solid #46D8D2;
+            }
+        /* -- The main tab & content styling of the vertical buttons info-- */
+        div.user-menu-content {
+            color: #323232;
+        }
+
+        ul.user-menu-list {
+            list-style: none;
+            margin-top: 20px;
+            margin-bottom: 0;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+
+            ul.user-menu-list > li {
+                padding-bottom: 8px;
+                text-align: center;
+            }
+
+        div.user-menu div.user-menu-content:not(.active) {
+            display: none;
+        }
+
+        /* -- The btn stylings for the btn icons -- */
+        .btn-label {
+            position: relative;
+            left: -12px;
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .btn-labeled {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        /* -- Custom classes for the snippet, won't effect any existing bootstrap classes of your site, but can be reused. -- */
+
+        .user-pad {
+            padding: 20px 25px;
+        }
+
+        .no-pad {
+            padding-right: 0;
+            padding-left: 0;
+            padding-bottom: 0;
+        }
+
+        .user-details {
+            background: #eee;
+            min-height: 333px;
+        }
+
+        .user-image {
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        .overview h3 {
+            font-weight: 300;
+            margin-top: 15px;
+            margin: 10px 0 0 0;
+        }
+
+        .overview h4 {
+            font-weight: bold !important;
+            font-size: 40px;
+            margin-top: 0;
+        }
+
+        .view {
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+            .view p {
+                margin-top: 20px;
+                margin-bottom: 0;
+            }
+
+        .caption {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(70, 216, 210, 0.44);
+            width: 100%;
+            height: 100%;
+            padding: 2%;
+            display: none;
+            text-align: center;
+            color: #fff !important;
+            z-index: 2;
+        }
+
+            .caption a {
+                padding-right: 10px;
+                color: #fff;
+            }
+
+        .info {
+            display: block;
+            padding: 10px;
+            background: #eee;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-align: right;
+        }
+
+            .info p, .stats p {
+                margin-bottom: 0;
+            }
+
+        .stats {
+            display: block;
+            padding: 10px;
+            color: white;
+        }
+
+        .share-links {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .square, .btn {
+            border-radius: 0px !important;
+        }
+
+        /* -- media query for user profile image -- */
+        @media (max-width: 767px) {
+            .user-image {
+                max-height: 400px;
+            }
+        }
+    </style>
+
+    <section id="titles" style="margin-top:16px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>ENTES HUMANOS </h1>
+                    <p>...</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="item" ng-init="tab = 1">
+                        <li class="item" ng-class="{actives:tab === 1}">
+                            <a class="item" href="#" ng-click="tab = 1">ENTE</a>
+                        </li>
+                        <li class="item" ng-class="{actives:tab === 2}">
+                            <a class="item" href="#" ng-click="tab = 2">NUEVO ENTE</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#title-->
+    <section id="title" style="margin-top:16px;">
+        <div class="container">
+            <div class="row user-menu-container square">
+                <div class="col-md-7 user-details">
+                    <div class="row coralbg white">
+                        <div class="col-md-6 no-pad">
+                            <div class="user-pad">
+                                <h3>Welcome back, Jessica</h3>
+                                <h4 class="white"><i class="fa fa-check-circle-o"></i> San Antonio, TX</h4>
+                                <h4 class="white"><i class="fa fa-twitter"></i> CoolesOCool</h4>
+                                <button type="button" class="btn btn-labeled btn-info" href="#">
+                                    <span class="btn-label"><i class="fa fa-pencil"></i></span>Update
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 no-pad">
+                            <div class="user-image">
+                                <img src="https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg" class="img-responsive thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row overview">
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>FOLLOWERS</h3>
+                            <h4>2,784</h4>
+                        </div>
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>FOLLOWING</h3>
+                            <h4>456</h4>
+                        </div>
+                        <div class="col-md-4 user-pad text-center">
+                            <h3>APPRECIATIONS</h3>
+                            <h4>4,901</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 user-menu-btns">
+                    <div class="btn-group-vertical square" id="responsive">
+                        <a href="#" class="btn btn-block btn-default active">
+                            <i class="fa fa-bell-o fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-envelope-o fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-laptop fa-3x"></i>
+                        </a>
+                        <a href="#" class="btn btn-default">
+                            <i class="fa fa-cloud-upload fa-3x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 user-menu user-pad">
+                    <div class="user-menu-content active">
+                        <h3>
+                            Recent Interactions
+                        </h3>
+                        <ul class="user-menu-list">
+                            <li>
+                                <h4><i class="fa fa-user coral"></i> Roselynn Smith followed you.</h4>
+                            </li>
+                            <li>
+                                <h4><i class="fa fa-heart-o coral"></i> Jonathan Hawkins followed you.</h4>
+                            </li>
+                            <li>
+                                <h4><i class="fa fa-paper-plane-o coral"></i> Gracie Jenkins followed you.</h4>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-labeled btn-success" href="#">
+                                    <span class="btn-label"><i class="fa fa-bell-o"></i></span>View all activity
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-menu-content">
+                        <h3>
+                            Your Inbox
+                        </h3>
+                        <ul class="user-menu-list">
+                            <li>
+                                <h4>From Roselyn Smith <small class="coral"><strong>NEW</strong> <i class="fa fa-clock-o"></i> 7:42 A.M.</small></h4>
+                            </li>
+                            <li>
+                                <h4>From Jonathan Hawkins <small class="coral"><i class="fa fa-clock-o"></i> 10:42 A.M.</small></h4>
+                            </li>
+                            <li>
+                                <h4>From Georgia Jennings <small class="coral"><i class="fa fa-clock-o"></i> 10:42 A.M.</small></h4>
+                            </li>
+                            <li>
+                                <button type="button" class="btn btn-labeled btn-danger" href="#">
+                                    <span class="btn-label"><i class="fa fa-envelope-o"></i></span>View All Messages
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="user-menu-content">
+                        <h3>
+                            Trending
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="view">
+                                    <div class="caption">
+                                        <p>47LabsDesign</p>
+                                        <a href="" rel="tooltip" title="Appreciate"><span class="fa fa-heart-o fa-2x"></span></a>
+                                        <a href="" rel="tooltip" title="View"><span class="fa fa-search fa-2x"></span></a>
+                                    </div>
+                                    <img src="http://24.media.tumblr.com/273167b30c7af4437dcf14ed894b0768/tumblr_n5waxesawa1st5lhmo1_1280.jpg" class="img-responsive">
+                                </div>
+                                <div class="info">
+                                    <p class="small" style="text-overflow: ellipsis">An Awesome Title</p>
+                                    <p class="small coral text-right"><i class="fa fa-clock-o"></i> Posted Today | 10:42 A.M.</p>
+                                </div>
+                                <div class="stats turqbg">
+                                    <span class="fa fa-heart-o"> <strong>47</strong></span>
+                                    <span class="fa fa-eye pull-right"> <strong>137</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="view">
+                                    <div class="caption">
+                                        <p>47LabsDesign</p>
+                                        <a href="" rel="tooltip" title="Appreciate"><span class="fa fa-heart-o fa-2x"></span></a>
+                                        <a href="" rel="tooltip" title="View"><span class="fa fa-search fa-2x"></span></a>
+                                    </div>
+                                    <img src="http://24.media.tumblr.com/282fadab7d782edce9debf3872c00ef1/tumblr_n3tswomqPS1st5lhmo1_1280.jpg" class="img-responsive">
+                                </div>
+                                <div class="info">
+                                    <p class="small" style="text-overflow: ellipsis">An Awesome Title</p>
+                                    <p class="small coral text-right"><i class="fa fa-clock-o"></i> Posted Today | 10:42 A.M.</p>
+                                </div>
+                                <div class="stats turqbg">
+                                    <span class="fa fa-heart-o"> <strong>47</strong></span>
+                                    <span class="fa fa-eye pull-right"> <strong>137</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-content">
+                        <h2 class="text-center">
+                            START SHARING
+                        </h2>
+                        <center><i class="fa fa-cloud-upload fa-4x"></i></center>
+                        <div class="share-links">
+                            <center>
+                                <button type="button" class="btn btn-lg btn-labeled btn-success" href="#" style="margin-bottom: 15px;">
+                                    <span class="btn-label"><i class="fa fa-bell-o"></i></span>A FINISHED PROJECT
+                                </button>
+                            </center>
+                            <center>
+                                <button type="button" class="btn btn-lg btn-labeled btn-warning" href="#">
+                                    <span class="btn-label"><i class="fa fa-bell-o"></i></span>A WORK IN PROGRESS
+                                </button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-page" class="container">
+        <div class="col-sm-12" ng-show="tab === 1">
+
+            <!--<form>
+                <md-menu>
+                    <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" aria-label="Open some menu">
+                        <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="doSomething()" aria-label="Do something">
+                                <md-icon md-menu-align-target md-svg-icon="call:phone"></md-icon>
+                                Do Something
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa-caret-up"></i></div>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre!" ng-model="searchFish">
+                    </div>
+                </div>
+            </form>-->
+
+            <table id="tablaItemsLicors" ng-init="configPages()" class="table  table-bordered table-striped table-condensed">
+                <thead>
+                    <tr class="table-head">
+                        <th style="width: 10%;">Acciones</th>
+                        <th style="width: 20%;">
+                            <a href="#" ng-click="sortType = 'nombreGenerico'; sortReverse = !sortReverse">
+                                Nombre
+                                <span ng-show="sortType == 'nombreGenerico' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'nombreGenerico' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 8%;">
+                            <a href="#" ng-click="sortType = 'concentracion.concentracion'; sortReverse = !sortReverse">
+                                Concentraci&oacute;n
+                                <span ng-show="sortType == 'concentracion.concentracion' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'concentracion.concentracion' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'formaFarmaceutica.formaFarmaceutica'; sortReverse = !sortReverse">
+                                Forma Farmac&eacute;utica
+                                <span ng-show="sortType == 'formaFarmaceutica.formaFarmaceutica' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'formaFarmaceutica.formaFarmaceutica' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'fabricante.fabricante'; sortReverse = !sortReverse">
+                                Fabricante
+                                <span ng-show="sortType == 'fabricante.fabricante' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'fabricante.fabricante' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 5%;">
+                            <a href="#" ng-click="sortType = 'categoria.categoria'; sortReverse = !sortReverse">
+                                Categoria
+                                <span ng-show="sortType == 'categoria.categoria' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'categoria.categoria' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 6%;">
+                            <a href="#" ng-click="sortType = 'stockMaximo'; sortReverse = !sortReverse">
+                                Stock Maximo
+                                <span ng-show="sortType == 'stockMaximo' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'stockMaximo' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 6%;">
+                            <a href="#" ng-click="sortType = 'stockMinimo'; sortReverse = !sortReverse">
+                                Stock Minimo
+                                <span ng-show="sortType == 'stockMinimo' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'stockMinimo' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 15%;">
+                            <a href="#" ng-click="sortType = 'indicaciones'; sortReverse = !sortReverse">
+                                Indicaciones
+                                <span ng-show="sortType == 'indicaciones' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'indicaciones' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'presentacion.presentacion'; sortReverse = !sortReverse">
+                                Presentaci&oacute;n
+                                <span ng-show="sortType == 'presentacion.presentacion' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'presentacion.presentacion' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items | orderBy:sortType:sortReverse | filter:searchFish" style="vertical-align: middle !important;" (contextmenu)="onRightClick($event, data); false">
+                        <td style="width: 10%; text-align:left;">
+                            <a class="btn btn-success btn-l" ng-click="selectJugador(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-success btn-l" confirm="Desea eliminar el licor, {{item.nombreGenerico}}?" ng-click="borrarJugador(item)"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                        <td style="width: 20%; text-align:left;">{{item.nombreGenerico}}</td>
+                        <td style="width: 8%; text-align:left;">{{item.concentracion.concentracion}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.formaFarmaceutica.formaFarmaceutica}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.fabricante.fabricante}}</td>
+                        <td style="width: 5%; text-align:left;">{{item.categoria.categoria}}</td>
+                        <td style="width: 6%; text-align:left;">{{item.stockMaximo}}</td>
+                        <td style="width: 6%;  text-align:left;">{{item.stockMinimo}}</td>
+                        <td style="width: 15%; text-align:left;">{{item.indicaciones}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.presentacion.presentacion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="gridStyle" ui-grid="gridOptions" ui-grid-selection ui-grid-edit ui-grid-cellnav right-click="rightClick($event);">...</div>
+
+            <!-- Navegar hacia atras -->
+            <button type='button' ng-disabled='currentPage == 0' ng-click='currentPage = currentPage-1'>&laquo;</button>
+
+            <!-- Navegar a una pagina especifica-->
+            <button type='button' ng-disabled='currentPage == page.no-1' ng-click='setPage(page.no)' ng-repeat='page in pages'>{{page.no}}</button>
+
+            <!-- Navegar hacia adelante -->
+            <button type='button' ng-disabled='currentPage >= items.length/pageSize -1' ng-click='currentPage = currentPage + 1'>&raquo;</button>
+            <!--   <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></ul>
+
+            <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></uib-pagination>
+                    <table id="mytable" class="table table-striped">
+                        <thead>
+                            <tr class="table-head">
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="person in aCandidates">
+                                <th>
+                                    <div>{{person}}</div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                -->
+        </div>
+
+        <div class="col-sm-12 text-center animate-hide" ng-show="tab === 2">
+            <fieldset>
+                <legend>Formulario para nuevo ingreso de licor.</legend>
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="mainItemForm" name="mainItemForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="well well-sm">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4">
+                                            <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                                            <div class="container">
+                                                <div class="row">
+                                                    <h2>Working Star Ratings for Bootstrap 3 <small>Hover and click on a star</small></h2>
+                                                </div>
+                                                <div class="row lead">
+                                                    <div id="stars" class="starrr"></div>
+                                                    You gave a rating of <span id="count">0</span> star(s)
+                                                </div>
+
+                                                <div class="row lead">
+                                                    <p>Also you can give a default rating by adding attribute data-rating</p>
+                                                    <div id="stars-existing" class="starrr" data-rating='4'></div>
+                                                    You gave a rating of <span id="count-existing">4</span> star(s)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-8">
+                                            <h4>
+                                                Bhaumik Patel
+                                            </h4>
+                                            <small>
+                                                <cite title="San Francisco, USA">
+                                                    San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                                                    </i>
+                                                </cite>
+                                            </small>
+                                            <p>
+                                                <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                                                <br />
+                                                <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                                                <br />
+                                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+
+
+                                            </p>
+                                            <!-- Split button -->
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary">
+                                                    Social
+                                                </button>
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                    <span class="caret"></span><span class="sr-only">Social</span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Twitter</a></li>
+                                                    <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                                    <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">Github</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="nombreGenerico">Nombre:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="nombreGenerico" class="form-control text-left" required="required" ng-model="newJugador.nombreGenerico">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="concentracion">Concentracion:</label>
+                                    <div class="col-sm-8">
+                                        <select id="concentracion" class="form-control"
+                                                ng-change="selectAction()"
+                                                ng-model="newJugador.concentracion"
+                                                ng-options="model.concentracion for model in concentraciones"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="presentacion">Presentaci&oacute;n:</label>
+                                    <div class="col-sm-8">
+                                        <select id="presentacion" class="form-control" required="required"
+                                                ng-model="newJugador.presentacion"
+                                                ng-options="model.presentacion for model in presentacion"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="formaFarmaceutica">Forma Farmaceutica:</label>
+                                    <div class="col-sm-8">
+                                        <select id="formaFarmaceutica" class="form-control" required="required"
+                                                ng-model="newJugador.formaFarmaceutica"
+                                                ng-options="model.formaFarmaceutica for model in formaFarmaceuticas"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="serial">Serial:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="serial" class="form-control text-left" ng-model="newJugador.serial">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="abreviatura">Abreviatura</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="abreviatura" class="form-control text-left" ng-model="newJugador.abreviatura">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="fabricante">Fabricante:</label>
+                                    <div class="col-sm-8">
+                                        <select id="fabricante" class="form-control"
+                                                ng-model="newJugador.fabricante"
+                                                ng-options="model.fabricante for model in fabricante"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="tipoInventario">Tipo de Inventario:</label>
+                                    <div class="col-sm-8">
+                                        <select id="tipoInventario" class="form-control"
+                                                ng-model="newJugador.tipoInventario"
+                                                ng-options="model.tipoInventario for model in tipoInventario"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="categoria">Categoria:</label>
+                                    <div class="col-sm-8">
+                                        <select id="categoria" class="form-control" required="required"
+                                                ng-model="newJugador.categoria"
+                                                ng-options="model.categoria for model in categoria"></select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="descripcion">Descripcion:</label>
+                                    <div class="col-sm-12">
+                                        <textarea name="descripcion" id="descripcion" required="required" class="form-control" rows="2" ng-model="newJugador.descripcion"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                             -->
+                        </div>
+
+                        <div class="row">
+                            <!--
+                            <input type="checkbox" class="form-control btn-primary" ng-model="newItem.es_empresa" /> Activo
+                            <input type="checkbox" class="form-control btn-primary" ng-model="newItem.es_persona" /> Activo
+                                                        -->
+                            <div class="form-group">
+
+                                <!--<button type="button" class="btn btn-danger btn-lg" ng-click="delete()" confirm="Desea eliminar el licor, {{newJugador.nombre}}?">Eliminar</button>-->
+                                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarJugador()" ng-disabled="mainItemForm.$invalid || selected"> <span class="glyphicon glyphicon-floppy-disk"></span></button>
+                                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarJugador(newItemMedicamento)" ng-disabled="!newJugador.nombreGenerico || !newJugador.serial || !selected"> <span class="glyphicon glyphicon-floppy-saved"></span></button>
+                                <button type="submit" class="btn btn-danger btn-lg" confirm="Desea eliminar el licor, {{newJugador.nombreGenerico}}?" ng-click="borrarJugador(newItemMedicamento)" ng-disabled="!newJugador.nombreGenerico || !newJugador.serial || !selected"><span class="glyphicon glyphicon-minus-sign"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </section><!--/#-page-->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $btnSets = $('#responsive'),
+                $btnLinks = $btnSets.find('a');
+
+            $btnLinks.click(function (e) {
+                e.preventDefault();
+                $(this).siblings('a.active').removeClass("active");
+                $(this).addClass("active");
+                var index = $(this).index();
+                $("div.user-menu>div.user-menu-content").removeClass("active");
+                $("div.user-menu>div.user-menu-content").eq(index).addClass("active");
+            });
+        });
+
+        $(document).ready(function () {
+            $("[rel='tooltip']").tooltip();
+
+            $('.view').hover(
+                function () {
+                    $(this).find('.caption').slideDown(250); //.fadeIn(250)
+                },
+                function () {
+                    $(this).find('.caption').slideUp(250); //.fadeOut(205)
+                }
+            );
+        });
+
+        /*Plugins Starts*/
+        // Starrr plugin (https://github.com/dobtco/starrr)
+        var __slice = [].slice;
+
+        (function ($, window) {
+            var Starrr;
+
+            Starrr = (function () {
+                Starrr.prototype.defaults = {
+                    rating: void 0,
+                    numStars: 5,
+                    change: function (e, value) { }
+                };
+
+                function Starrr($el, options) {
+                    var i, _, _ref,
+                        _this = this;
+
+                    this.options = $.extend({}, this.defaults, options);
+                    this.$el = $el;
+                    _ref = this.defaults;
+                    for (i in _ref) {
+                        _ = _ref[i];
+                        if (this.$el.data(i) != null) {
+                            this.options[i] = this.$el.data(i);
+                        }
+                    }
+                    this.createStars();
+                    this.syncRating();
+                    this.$el.on('mouseover.starrr', 'span', function (e) {
+                        return _this.syncRating(_this.$el.find('span').index(e.currentTarget) + 1);
+                    });
+                    this.$el.on('mouseout.starrr', function () {
+                        return _this.syncRating();
+                    });
+                    this.$el.on('click.starrr', 'span', function (e) {
+                        return _this.setRating(_this.$el.find('span').index(e.currentTarget) + 1);
+                    });
+                    this.$el.on('starrr:change', this.options.change);
+                }
+
+                Starrr.prototype.createStars = function () {
+                    var _i, _ref, _results;
+
+                    _results = [];
+                    for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
+                        _results.push(this.$el.append("<span class='glyphicon .glyphicon-star-empty'></span>"));
+                    }
+                    return _results;
+                };
+
+                Starrr.prototype.setRating = function (rating) {
+                    if (this.options.rating === rating) {
+                        rating = void 0;
+                    }
+                    this.options.rating = rating;
+                    this.syncRating();
+                    return this.$el.trigger('starrr:change', rating);
+                };
+
+                Starrr.prototype.syncRating = function (rating) {
+                    var i, _i, _j, _ref;
+
+                    rating || (rating = this.options.rating);
+                    if (rating) {
+                        for (i = _i = 0, _ref = rating - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+                            this.$el.find('span').eq(i).removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+                        }
+                    }
+                    if (rating && rating < 5) {
+                        for (i = _j = rating; rating <= 4 ? _j <= 4 : _j >= 4; i = rating <= 4 ? ++_j : --_j) {
+                            this.$el.find('span').eq(i).removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+                        }
+                    }
+                    if (!rating) {
+                        return this.$el.find('span').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+                    }
+                };
+
+                return Starrr;
+
+            })();
+            return $.fn.extend({
+                starrr: function () {
+                    var args, option;
+
+                    option = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+                    return this.each(function () {
+                        var data;
+
+                        data = $(this).data('star-rating');
+                        if (!data) {
+                            $(this).data('star-rating', (data = new Starrr($(this), option)));
+                        }
+                        if (typeof option === 'string') {
+                            return data[option].apply(data, args);
+                        }
+                    });
+                }
+            });
+        })(window.jQuery, window);
+
+        $(function () {
+            return $(".starrr").starrr();
+        });
+
+        $(document).ready(function () {
+
+            $('#stars').on('starrr:change', function (e, value) {
+                $('#count').html(value);
+            });
+
+            $('#stars-existing').on('starrr:change', function (e, value) {
+                $('#count-existing').html(value);
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,93 @@
+
+<section id="main-slider" class="no-margin">
+    <div class="carousel slide wet-asphalt">
+        <ol class="carousel-indicators">
+            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slider" data-slide-to="1"></li>
+            <li data-target="#main-slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item" style="background: url(./public/images/slider/bg1.jpg) no-repeat !important;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content centered" style="margin-left:8em;">
+                                <br /><br /><br /><br />
+                                <!--
+                                <img src="./public/images/logoseanoriginal.png"   class="img-responsive img-thumbnail img-blog"
+                                     style="background-color: white; margin: 20px; border: 2px solid #1469A2; margin-bottom: 10px;" alt="logo">-->
+                                <ul>
+                                    <li ng-repeat="servicio in servicios" ng-click="selectServicio(servicio)" ng-if="servicio.activo">
+                                        {{ servicio.servicio}}
+                                        {{ servicio.descripcion}}
+                                    </li>
+                                </ul>
+                                <h2 class="boxed animation animated-item-1">http://cds.net.co</h2>
+                                <p class="boxed animation animated-item-2">Casa de desarrollo de software.</p>
+                                <a class="btn btn-md animation animated-item-3" href="#" ng-click="cargarEnlace('servicios')">Ver
+                                    Mas</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.item-->
+            <div class="item" style="background: url(./public/images/slider/bg2.jpg) no-repeat 90% !important;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="carousel-content center centered" style="margin-left:8em;">
+                                <!--<li ng-repeat="alianza in alianzas" ng-if="alianza.activo" >
+                                    {{ alianza.nombre}} "
+                                    {{ alianza.direccion}}"					
+                                </li>-->
+                                <h2 class="boxed animation animated-item-1">http://cds.net.co</h2>
+                                <p class="boxed animation animated-item-2">Casa de desarrollo de software.</p>
+                                <a class="btn btn-md animation animated-item-3" href="#" ng-click="cargarEnlace('servicios')">Ver
+                                    Mas</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.item-->
+            <div class="item active" style="background-image: url(./public/images/slider/bg3.png)">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="carousel-content centered" style="margin-left:20em;">
+                                <h2 class="boxed animation animated-item-1">http://cds.net.co</h2>
+                                <p class="boxed animation animated-item-2">Casa de desarrollo de software.</p>
+                                <a class="btn btn-md animation animated-item-3" href="#" ng-click="cargarEnlace('servicios')" style="margin-left:8em;" >Ver
+                                    Mas</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 hidden-xs animation animated-item-4">
+                        <div class="centered">
+                            <div class="embed-container">
+                                <!--
+                                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fafrocaq%2Fvideos%2F2187171157967362%2F&show_text=0&width=560" style="border:3px solid white;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+                                <!--<iframe id="frameVideo" src="public/afrocaq/video/COMPARSASABADO02JUNIO2018.mp4" style="border:3px solid white;"
+                                    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--/.item-->
+    </div>
+    <!--/.carousel-inner-->
+    </div>
+    <!--/.carousel-->
+    <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+        <i class="icon-angle-left"></i>
+    </a>
+    <a class="next hidden-xs" href="#main-slider" data-slide="next">
+        <i class="icon-angle-right"></i>
+    </a>
+</section>
+<!--/#main-slider-->

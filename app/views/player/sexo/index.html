@@ -1,0 +1,48 @@
+
+<div class="container">
+    <!-- <div class="jumbotron text-center" ng-prueba>
+        <h1>Nº de servicios <span class="label label-success">{{ servicios.length}}</span></h1>
+    </div> -->
+    <div class="gap"></div>
+    <h1 class="center">Servicios en la Clinica</h1>
+    <p class="lead center">Veterinaria SEAN te brinda los siguientes servicios para el Bienestar de su mascota.</p>
+    <div class="gap"></div>
+    <div >
+        <div class="col-sm-6 col-sm-offset-1">
+            <table class="table table">
+                <thead>
+                    <tr class="alert">
+                        <th>Servicio</th>
+                        <th>Descripcion</th>
+                        <th>Activo</th>
+                        <th>Domicilio</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr ng-repeat="servicio in servicios" ng-click="selectServicio(servicio)">
+                        <td>{{ servicio.servicio}}</td>
+                        <td>{{ servicio.descripcion}}</td>
+                        <td>{{ servicio.activo}}</td>	
+                        <td>{{ servicio.es_domicilio}}</td>							
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-4 col-sm-offset-1 text-center">
+            <form name="myForm">
+                <div class="form-group">
+                    <input type="text" class="form-control text-center" placeholder="servicio" ng-model="newServicio.servicio" required>
+                    <input type="text" class="form-control text-center" placeholder="descripcion" ng-model="newServicio.descripcion" required>
+                    <input type="checkbox" class="form-control" ng-model="newServicio.activo" > Activo
+                    <input type="checkbox" class="form-control" ng-model="newServicio.es_domicilio" > Es Domicilio
+                </div>
+
+                <!-- Acciones que podemos realizar en el formulario -->
+                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarServicio()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarServicio(newServicio)" ng-disabled="!newServicio.servicio || !newServicio.descripcion || !selected">Modificar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarServicio(newServicio)" ng-disabled="!newServicio.servicio || !newServicio.descripcion || !selected">Borrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+

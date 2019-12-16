@@ -1,0 +1,33 @@
+<section id="title" class="orange">
+    <div class="container">        <br>        <br>        <br>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Inicio de Sesión : {{user}}</h1>
+                <p>Inicie sesion para obtener acceso a todos los menus y servicios</p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#title-->
+
+<section id="iniciodesesion" class="container">
+    <form class="center" role="form">
+        <!--method="post" action="/api/identificacion"-->
+        <fieldset class="registration-form">
+            <div class="form-group">
+                <input type="text" id="usuario" name="usuario" ng-model="user.usuario" placeholder="Usuario" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" ng-model="user.passwordHash" placeholder="Password"
+                    class="form-control">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-md btn-block" ng-click="login(user)">Iniciar Sesión</button>
+            </div>
+        </fieldset>
+    </form>
+</section>
+<!--/#registration-->

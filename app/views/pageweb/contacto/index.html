@@ -1,0 +1,215 @@
+<div style="background-color: whitesmoke;" ng-app="MainAppContacto" ng-controller="mainControllerContacto" ng-init="ajustarTabla('tablaContactos', 390);">
+    <style>
+        /*table {
+            overflow: hidden;
+        }
+
+        tr:hover {
+            background-color: #ffa;
+        }
+
+        td, th {
+            position: relative;
+        }
+
+            td:hover::after,
+            th:hover::after {
+                content: "";
+                position: absolute;
+                background-color: #ffa;
+                left: 0;
+                top: -5000px;
+                height: 10000px;
+                width: 100%;
+                z-index: -1;
+            }
+
+            td:focus::after,
+            th:focus::after {
+                content: '';
+                background-color: lightblue;
+                position: absolute;
+                left: 0;
+                height: 10000px;
+                top: -5000px;
+                width: 100%;
+                z-index: -1;
+            }
+
+            td:focus::before {
+                background-color: lightblue;
+                content: '';
+                height: 100%;
+                top: 0;
+                left: -5000px;
+                position: absolute;
+                width: 10000px;
+                z-index: -1;
+            }*/
+        tbody tr:nth-child(odd) {
+            z-index: -1;
+            background: #eee;
+        }
+
+        .row-selected {
+            background-color: #b6ff00 !important;
+            color:#000000;
+            font-weight: bold;
+        }
+    .text-on-pannel {
+        background: #fff none repeat scroll 0 0;
+        height: auto;
+        margin-left: 20px;
+        padding: 3px 5px;
+        position: absolute;
+        margin-top: -47px;
+        border: 1px solid #337ab7;
+        border-radius: 8px;
+    }
+    .panel {
+        /* for text on pannel */
+        margin-top: 47px !important;
+    }
+    .panel-body {
+        padding-top: 30px !important;
+    }
+    </style>
+    <script type="text/javascript">
+        // Whatever kind of mobile test you wanna do.
+        /*if (screen.width < 500) {
+        
+          // :hover will trigger also once the cells are focusable
+          // you can use this class to separate things
+          $("body").addClass("nohover");
+        
+          // Make all the cells focusable
+          $("td, th")
+            .attr("tabindex", "1")
+            // When they are tapped, focus them
+            .on("touchstart", function() {
+              $(this).focus();
+            });
+        
+        }
+        $('#tablaContactos').on('click', '.clickable-row', function (event) {
+            $(this).addClass('row-selected').siblings().removeClass('row-selected');
+        });*/
+/*
+        $('#tablaContactos').on('click', '.clickable-row', function(event) {
+  if($(this).hasClass('row-selected')){
+    $(this).removeClass('row-selected');
+  } else {
+    $(this).addClass('row-selected').siblings().removeClass('row-selected');
+  }
+});*/
+    </script>
+    <!--/#title-->
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <section id="title" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>Contactos a la fundación </h1>
+                    <p>Escribenos tus dudas o ingresa tus preguntas, en breve te damos un soporte en linea.</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="alianza" ng-init="tab = 1">
+                        <li class="alianza" ng-class="{actives:tab === 1}">
+                            <a class="alianza" ng-click="tab = 1">CONTACTOS</a>
+                        </li>
+                        <li class="alianza" ng-class="{actives:tab === 2}">
+                            <a class="alianza" ng-click="tab = 2">NUEVO CONTACTO</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container">
+
+        <section id="contact-page" class="container">
+            <div class="col-sm-12" ng-show="tab === 1">
+                <table id="tablaContactos" class="table" style="height:250px !important;">
+                    <thead>
+                        <tr class="alert">
+                            <th style="width: 20%;">Nombre</th>
+                            <th style="width: 20%;">Apellidos</th>
+                            <th style="width: 20%;">Email</th>
+                            <th style="width: 20%;">Contacto</th>
+                            <th style="width: 10%;">Fecha</th>
+                            <th style="width: 10%;">Boletin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable-row" ng-repeat="contacto in contactos" ng-click="selectContact(contacto)">
+                            <td style="width: 20%;">{{ contacto.nombre}}</td>
+                            <td style="width: 20%;">{{ contacto.apellidos}}</td>
+                            <td style="width: 20%;">{{ contacto.email}}</td>
+                            <td style="width: 20%;">{{ contacto.contacto}}</td>
+                            <td style="width: 10%;">{{ contacto.fecha.substring(0, 10)}}</td>
+                            <td style="width: 10%;"> <input type="checkbox" ng-model="contacto.boletin" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-12 text-center animate-hide" ng-show="tab === 2">
+
+                <div class="col-xs-12">
+                    <div class="status alert alert-success" style="display: none"></div>
+                    <form id="mainContactoForm" class="contact-form" name="mainContactoForm" role="form" style="padding: 20px !important;">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" style="padding-left: 8px;" class="form-control" required="required"
+                                        placeholder="Su Nombre" ng-model="newContacto.nombre">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" style="padding-left: 8px;" class="form-control" placeholder="Sus Apellidos"
+                                        ng-model="newContacto.apellidos">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" style="padding-left: 8px;" class="form-control" required="required"
+                                        placeholder="Correo Electronico" ng-model="newContacto.email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" ng-model="newContacto.boletin" /> Registrar al Boletin
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
+                                        ng-click="registrarContacto()" ng-disabled="mainContactoForm.$invalid || selected">
+                                        <span class="glyphicon glyphicon-floppy-disk"></span></button>
+                                    <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarContacto(newContacto)"
+                                        ng-disabled="!newContacto.nombre || !newContacto.contacto || !selected">
+                                        <span class="glyphicon glyphicon-floppy-saved"></span></button>
+                                    <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarContacto(newContacto)"
+                                        ng-disabled="!newContacto.nombre || !newContacto.contacto || !selected"><span
+                                            class="glyphicon glyphicon-minus-sign"></span></button>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="8"
+                                    placeholder="Cuentenos en que le podemos ayudar, EScribanos en este espacio un mensaje para contactarle posteriormente"
+                                    ng-model="newContacto.contacto"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div class="container row">
+            <div class="col-xs-12">
+                <h4>Nuestra Ubicación</h4>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3988.245815147223!2d-75.60052368466961!3d1.6086863611358364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sco!4v1542804421040"
+                    frameborder="0" allowfullscreen width="900" height="400" style="border:2px solid gray; margin:1px auto !important;"></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>

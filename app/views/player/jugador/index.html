@@ -1,0 +1,441 @@
+<div ng-app="MainAppJugador" ng-controller="mainControllerJugador" ng-init="ajustarTabla('tablaItemsLicors', 190);">
+    <style>
+        p.item {
+            font-size: 18px;
+            font-weight: lighter;
+            font-style: normal;
+            color: rgb(62, 62, 62);
+            margin: 18px;
+        }
+
+        ul.item {
+            float: left;
+            border-radius: 5px;
+            /*border: solid 1px rgb(198, 198, 198);*/
+            padding: 7px 11px;
+            background-color: rgb(248,248,248);
+        }
+
+        li.item {
+            float: left;
+            background-color: rgb(200,200,200);
+            padding: 5px 19px;
+            margin: 5px 2px 5px 0px;
+            color: black;
+            list-style: none;
+        }
+
+            li.item:hover, li.item:hover a {
+                background-color: rgb(6,179,6);
+                color: white;
+            }
+
+            li.item a {
+                text-decoration: none;
+                color: white;
+                font-size: 21px;
+                font-style: normal;
+                text-shadow: 1px 0px 3px rgb(157, 157, 157);
+            }
+
+            li.item:nth-child(1) {
+                border-radius: 4px 0px 0px 4px;
+                margin-left: 1px;
+            }
+
+            li.item:nth-child(3) {
+                border-radius: 0px 4px 4px 0px;
+            }
+
+        .actives {
+            background-color: rgb(6,179,6);
+        }
+    </style>
+    <style id="jsbin-css">
+        * {
+            text-align: center;
+        }
+
+        table {
+            background-color: #FFF;
+            color: #333;
+            font-family: sans-serif;
+            font-size: .8em;
+            font-weight: 300;
+            text-align: left;
+            line-height: 40px;
+            border-spacing: 0;
+            border: 1px solid #428bca;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        thead tr:first-child {
+            background: #428bca;
+            color: #fff;
+            border: none;
+        }
+
+        th {
+            font-weight: bold;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+            th:first-child,
+            td:first-child {
+                padding: 0 15px 0 20px;
+            }
+
+        thead tr:last-child th {
+            border-bottom: 2px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f0fbff;
+        }
+
+        tbody tr:last-child td {
+            border: none;
+        }
+
+        tbody td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        td:last-child {
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        button {
+            position: relative;
+            vertical-align: top;
+            height: 60px;
+            font-size: 22px;
+            color: white;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            background: #3498db;
+            border: 0;
+            border-bottom: 2px solid #2a8bcc;
+            cursor: pointer;
+            -webkit-box-shadow: inset 0 -2px #2a8bcc;
+            box-shadow: inset 0 -2px #2a8bcc;
+        }
+
+            button:active {
+                top: 1px;
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            button:disabled {
+                outline: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                opacity: 0.5;
+            }
+
+        #tablaItemsLicors a {
+            color: white;
+            text-transform: uppercase !important;
+        }
+
+        .context-menu {
+            position: absolute;
+            display: none;
+        }
+
+        .context-active {
+            display: block;
+            position: absolute;
+        }
+    </style>
+    <section id="title" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>LICORES </h1>
+                    <p>Tipo de Inventario.</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="item" ng-init="tab = 1">
+                        <li class="item" ng-class="{actives:tab === 1}">
+                            <a class="item" href="#" ng-click="tab = 1">JUGADORES</a>
+                        </li>
+                        <li class="item" ng-class="{actives:tab === 2}">
+                            <a class="item" href="#" ng-click="tab = 2">NUEVO JUGADOR</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/#title-->
+
+    <section id="contact-page" class="container">
+        <div class="col-sm-12" ng-show="tab === 1">
+
+            <form>
+                <md-menu>
+                    <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" aria-label="Open some menu">
+                        <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-click="doSomething()" aria-label="Do something">
+                                <md-icon md-menu-align-target md-svg-icon="call:phone"></md-icon>
+                                Do Something
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa-caret-up"></i></div>
+                        <input type="text" class="form-control" placeholder="Buscar por nombre de medicamento!" ng-model="searchFish">
+                    </div>
+                </div>
+            </form>
+
+            <table id="tablaItemsLicors" ng-init="configPages()" class="table  table-bordered table-striped table-condensed">
+                <thead>
+                    <tr class="table-head">
+                        <th style="width: 10%;">Acciones</th>
+                        <th style="width: 20%;">
+                            <a href="#" ng-click="sortType = 'nombreGenerico'; sortReverse = !sortReverse">
+                                Nombre
+                                <span ng-show="sortType == 'nombreGenerico' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'nombreGenerico' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 8%;">
+                            <a href="#" ng-click="sortType = 'concentracion.concentracion'; sortReverse = !sortReverse">
+                                Concentraci&oacute;n
+                                <span ng-show="sortType == 'concentracion.concentracion' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'concentracion.concentracion' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'formaFarmaceutica.formaFarmaceutica'; sortReverse = !sortReverse">
+                                Forma Farmac&eacute;utica
+                                <span ng-show="sortType == 'formaFarmaceutica.formaFarmaceutica' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'formaFarmaceutica.formaFarmaceutica' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'fabricante.fabricante'; sortReverse = !sortReverse">
+                                Fabricante
+                                <span ng-show="sortType == 'fabricante.fabricante' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'fabricante.fabricante' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 5%;">
+                            <a href="#" ng-click="sortType = 'categoria.categoria'; sortReverse = !sortReverse">
+                                Categoria
+                                <span ng-show="sortType == 'categoria.categoria' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'categoria.categoria' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 6%;">
+                            <a href="#" ng-click="sortType = 'stockMaximo'; sortReverse = !sortReverse">
+                                Stock Maximo
+                                <span ng-show="sortType == 'stockMaximo' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'stockMaximo' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 6%;">
+                            <a href="#" ng-click="sortType = 'stockMinimo'; sortReverse = !sortReverse">
+                                Stock Minimo
+                                <span ng-show="sortType == 'stockMinimo' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'stockMinimo' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 15%;">
+                            <a href="#" ng-click="sortType = 'indicaciones'; sortReverse = !sortReverse">
+                                Indicaciones
+                                <span ng-show="sortType == 'indicaciones' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'indicaciones' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th style="width: 10%;">
+                            <a href="#" ng-click="sortType = 'presentacion.presentacion'; sortReverse = !sortReverse">
+                                Presentaci&oacute;n
+                                <span ng-show="sortType == 'presentacion.presentacion' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'presentacion.presentacion' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items | orderBy:sortType:sortReverse | filter:searchFish" style="vertical-align: middle !important;" (contextmenu)="onRightClick($event, data); false">
+                        <td style="width: 10%; text-align:left;">
+                            <a class="btn btn-success btn-l" ng-click="selectJugador(item)"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-success btn-l"  confirm="Desea eliminar el licor, {{item.nombreGenerico}}?" ng-click="borrarJugador(item)" ><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                        <td style="width: 20%; text-align:left;">{{item.nombreGenerico}}</td>
+                        <td style="width: 8%; text-align:left;">{{item.concentracion.concentracion}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.formaFarmaceutica.formaFarmaceutica}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.fabricante.fabricante}}</td>
+                        <td style="width: 5%; text-align:left;">{{item.categoria.categoria}}</td>
+                        <td style="width: 6%; text-align:left;">{{item.stockMaximo}}</td>
+                        <td style="width: 6%;  text-align:left;">{{item.stockMinimo}}</td>
+                        <td style="width: 15%; text-align:left;">{{item.indicaciones}}</td>
+                        <td style="width: 10%; text-align:left;">{{item.presentacion.presentacion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="gridStyle" ui-grid="gridOptions" ui-grid-selection ui-grid-edit ui-grid-cellnav right-click="rightClick($event);">...</div>
+
+            <!-- Navegar hacia atras -->
+            <button type='button' ng-disabled='currentPage == 0' ng-click='currentPage = currentPage-1'>&laquo;</button>
+
+            <!-- Navegar a una pagina especifica-->
+            <button type='button' ng-disabled='currentPage == page.no-1' ng-click='setPage(page.no)' ng-repeat='page in pages'>{{page.no}}</button>
+
+            <!-- Navegar hacia adelante -->
+            <button type='button' ng-disabled='currentPage >= items.length/pageSize -1' ng-click='currentPage = currentPage + 1'>&raquo;</button>
+            <!--   <ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></ul>
+
+            <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></uib-pagination>
+                    <table id="mytable" class="table table-striped">
+                        <thead>
+                            <tr class="table-head">
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="person in aCandidates">
+                                <th>
+                                    <div>{{person}}</div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                -->
+        </div>
+
+        <div class="col-sm-12 text-center animate-hide" ng-show="tab === 2">
+            <fieldset>
+                <legend>Formulario para nuevo ingreso de licor.</legend>
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="mainItemForm" name="mainItemForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="nombreGenerico">Nombre:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="nombreGenerico" class="form-control text-left" required="required" ng-model="newJugador.nombreGenerico">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="concentracion">Concentracion:</label>
+                                    <div class="col-sm-8">
+                                        <select id="concentracion" class="form-control"
+                                                ng-change="selectAction()"
+                                                ng-model="newJugador.concentracion"
+                                                ng-options="model.concentracion for model in concentraciones"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="presentacion">Presentaci&oacute;n:</label>
+                                    <div class="col-sm-8">
+                                        <select id="presentacion" class="form-control" required="required"
+                                                ng-model="newJugador.presentacion"
+                                                ng-options="model.presentacion for model in presentacion"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="formaFarmaceutica">Forma Farmaceutica:</label>
+                                    <div class="col-sm-8">
+                                        <select id="formaFarmaceutica" class="form-control" required="required"
+                                                ng-model="newJugador.formaFarmaceutica"
+                                                ng-options="model.formaFarmaceutica for model in formaFarmaceuticas"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="serial">Serial:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="serial" class="form-control text-left" ng-model="newJugador.serial">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="abreviatura">Abreviatura</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="abreviatura" class="form-control text-left" ng-model="newJugador.abreviatura">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="fabricante">Fabricante:</label>
+                                    <div class="col-sm-8">
+                                        <select id="fabricante" class="form-control"
+                                                ng-model="newJugador.fabricante"
+                                                ng-options="model.fabricante for model in fabricante"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="tipoInventario">Tipo de Inventario:</label>
+                                    <div class="col-sm-8">
+                                        <select id="tipoInventario" class="form-control"
+                                                ng-model="newJugador.tipoInventario"
+                                                ng-options="model.tipoInventario for model in tipoInventario"></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="categoria">Categoria:</label>
+                                    <div class="col-sm-8">
+                                        <select id="categoria" class="form-control" required="required"
+                                                ng-model="newJugador.categoria"
+                                                ng-options="model.categoria for model in categoria"></select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5 text-left" for="descripcion">Descripcion:</label>
+                                    <div class="col-sm-12">
+                                        <textarea name="descripcion" id="descripcion" required="required" class="form-control" rows="2" ng-model="newJugador.descripcion"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                             -->
+                        </div>
+
+                        <div class="row">
+                            <!--
+                            <input type="checkbox" class="form-control btn-primary" ng-model="newItem.es_empresa" /> Activo
+                            <input type="checkbox" class="form-control btn-primary" ng-model="newItem.es_persona" /> Activo
+                                                        -->
+                            <div class="form-group">
+
+                                <!--<button type="button" class="btn btn-danger btn-lg" ng-click="delete()" confirm="Desea eliminar el licor, {{newJugador.nombre}}?">Eliminar</button>-->
+                                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarJugador()" ng-disabled="mainItemForm.$invalid || selected"> <span class="glyphicon glyphicon-floppy-disk"></span></button>
+                                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarJugador(newItemMedicamento)" ng-disabled="!newJugador.nombreGenerico || !newJugador.serial || !selected"> <span class="glyphicon glyphicon-floppy-saved"></span></button>
+                                <button type="submit" class="btn btn-danger btn-lg" confirm="Desea eliminar el licor, {{newJugador.nombreGenerico}}?" ng-click="borrarJugador(newItemMedicamento)" ng-disabled="!newJugador.nombreGenerico || !newJugador.serial || !selected"><span class="glyphicon glyphicon-minus-sign"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </section><!--/#-page-->
+</div>

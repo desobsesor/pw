@@ -1,0 +1,235 @@
+<div style="background-color: whitesmoke;" ng-app="MainAppAliado" ng-controller="mainControllerAliado" ng-init="ajustarTabla('tablaAliados', 190);">
+    <style>
+        p.alianza {
+            font-size: 18px;
+            font-weight: lighter;
+            font-style: normal;
+            color: rgb(62, 62, 62);
+            margin: 18px;
+        }
+        ul.alianza {
+            float: left;
+            border-radius: 5px;
+            /*border: solid 1px rgb(198, 198, 198);*/
+            padding: 7px 11px;
+            background-color: rgb(248,248,248);
+        }
+        li.alianza {
+            float: left;
+            background-color: rgb(200,200,200);
+            padding: 5px 19px;
+            margin: 5px 2px 5px 0px;
+            color: black;
+            list-style: none;
+        }
+        li.alianza:hover, li.alianza:hover a {
+            background-color: rgb(6,179,6);
+            color:white;
+        }
+        li.alianza a {
+            text-decoration: none;
+            color: white;
+            font-size: 21px;
+            font-style: normal;
+            text-shadow: 1px 0px 3px rgb(157, 157, 157);
+        }
+        li.alianza:nth-child(1) { border-radius: 4px 0px 0px 4px; margin-left: 1px;}
+        li.alianza:nth-child(3) { border-radius: 0px 4px 4px 0px;}
+        .actives {
+            background-color: rgb(6,179,6);
+        }
+        .control-label{
+            line-height: 15px !important;
+            font-size: 1.5rem !important;
+        }
+        .form-inline .form-group { margin-right:10px; }
+.well-primary {
+color: rgb(255, 255, 255);
+background-color: rgb(66, 139, 202);
+border-color: rgb(53, 126, 189);
+}
+.glyphicon { margin-right:5px; }
+    </style>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <section id="title" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>Alianzas estrategias de la fundación </h1>
+                    <p>Nuestros aliados en la comunidad</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="alianza" ng-init="tab = 1">
+                        <li class="alianza" ng-class="{actives:tab === 1}">
+                            <a class="alianza" ng-click="tab = 1">ALIANZAS</a>
+                        </li>
+                        <li class="alianza" ng-class="{actives:tab === 2}">
+                            <a class="alianza" ng-click="tab = 2">NUEVA ALIANZA</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--/#title-->
+    <section id="contact-page" class="container">
+        <div class="col-sm-12" ng-show="tab === 1">
+            <table id="tablaAliados" class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">Nombre</th>
+                        <th style="width: 25%;">Descripcion</th>
+                        <th style="width: 15%;">Prop</th>
+                        <!--
+                        <th style="width: 5%;">Emp.</th>
+                        <th style="width: 5%;">Per.</th>-->
+                        <th style="width: 5%;">Documento</th>
+                        <th style="width: 20%;">Direccion</th>
+                        <th style="width: 10%;">Pagina Web</th>
+                        <th style="width: 10%;">Email</th>
+                        <th style="width: 5%;">Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="aliado in aliados" ng-click="selectAliado(aliado)">
+                        <td style="width: 10%;">{{ aliado.nombre}}</td>
+                        <td style="width: 25%;">{{ aliado.descripcion}}</td>
+                        <td style="width: 15%;">{{ aliado.propietario}}</td>
+                        <!--
+                        <td style="width: 5%;">{{aliado.es_empresa}}</td>	
+                        <td style="width: 5%;">{{ aliado.es_persona}}</td>-->
+                        <td style="width: 5%;">{{ aliado.documento}}</td>
+                        <td style="width: 20%;">{{aliado.direccion}}</td>
+                        <td style="width: 10%;">{{ aliado.pagina_web}}</td>
+                        <td style="width: 10%;">{{ aliado.email}}</td>
+                        <td style="width: 5%;">{{aliado.telefono}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-sm-12 text-center animate-hide" ng-show="tab === 2">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span
+                                                class="glyphicon glyphicon-file">
+                                            </span>REGISTRANDO NUEVA ALIANZA</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <input type="text" ng-model="newAliado.nombre" class="form-control"
+                                                        placeholder="Nombre" required />
+                                                </div>
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <textarea ng-model="newAliado.descripcion" class="form-control"
+                                                        placeholder="Descripcion" rows="3" required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <input type="text" class="form-control" ng-model="newAliado.documento"
+                                                        id="documento" placeholder="Documento" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <input type="text" class="form-control" ng-model="newAliado.direccion"
+                                                        id="direccion" placeholder="Dirección" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <input type="text" class="form-control" ng-model="newAliado.telefono"
+                                                        id="telefono" placeholder="Telefono" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                    <input type="text" class="form-control" ng-model="newAliado.propietario"
+                                                        id="propietario" placeholder="Propietario" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="well well-sm">
+                                                    <div class="input-group" style="margin:-3px 0 -3px 0 !important;">
+                                                        <span class="input-group-addon">www.afrocaq.org/</span>
+                                                        <input type="text" ng-model="newAliado.pagina_web" class="form-control"
+                                                            placeholder="Pagina Web" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="well well-sm">
+                                                    <div class="input-group" style="margin:-3px 0 -3px 0 !important;">
+                                                        <span class="input-group-addon">correo@electronico.com/</span>
+                                                        <input type="text" ng-model="newAliado.email" class="form-control"
+                                                            placeholder="Correo electrónico" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="well well-sm well-primary">
+                                                    <form class="form form-inline " role="form">
+                                                        <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                            <input type="text" ng-model="newAliado.fecha" class="form-control"
+                                                                value="" placeholder="Fecha Registro" required />
+                                                        </div>
+                                                        <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                            <select class="form-control" ng-model="newAliado.activo">
+                                                                <option value="1" selected>Activo</option>
+                                                                <option value="0">Inactivo</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" style="margin:-3px 0 -3px 0 !important;">
+                                                                <button type="submit" class="btn btn-success btn-ls" ng-click="registrarAliado()"
+                                                                    ng-hide="mainAliadoForm.$invalid || selected">
+                                                                    <span class="glyphicon glyphicon-floppy-disk"></span>Guardar</button>
+                                                                <button type="submit" class="btn btn-warning btn-ls" ng-click="modificarAliado(newAliado)"
+                                                                    ng-hide="!newAliado.nombre || !newAliado.descripcion || !selected">
+                                                                    <span class="glyphicon glyphicon-floppy-saved"></span>Guardar Cambios</button>
+                                                                <button type="submit" class="btn btn-danger btn-ls" ng-click="borrarAliado(newAliado)"
+                                                                    ng-hide="!newAliado.nombre || !newAliado.descripcion || !selected"><span
+                                                                        class="glyphicon glyphicon-minus-sign"></span>Eliminar</button>
+                                                                <button type="button" class="btn btn-default btn-ls">
+                                                                    <span class="glyphicon glyphicon-cancel"></span>Cancelar</button>
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+                                        <div class="row">
+                                                
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--/#contact-page-->
+</div>

@@ -1,0 +1,584 @@
+﻿<div ng-app="MainAppNuevaGaleria" ng-controller="mainControllerNuevaGaleria" style="margin-top:-10px;">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="./public/js/jquery.js"></script>
+    <!------   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    Include the above in your HEAD tag ---------->
+    <style>
+        .wizard {
+            margin: 20px auto;
+            background: #fff;
+        }
+
+            .wizard .nav-tabs {
+                position: relative;
+                margin: 40px auto;
+                margin-bottom: 0;
+                border-bottom-color: #e0e0e0;
+            }
+
+            .wizard > div.wizard-inner {
+                position: relative;
+            }
+
+        .connecting-line {
+            height: 2px;
+            background: #e0e0e0;
+            position: absolute;
+            width: 80%;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: 50%;
+            z-index: 1;
+        }
+
+        .wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+            color: #555555;
+            cursor: default;
+            border: 0;
+            border-bottom-color: transparent;
+        }
+
+        span.round-tab {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            display: inline-block;
+            border-radius: 100px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            text-align: center;
+            font-size: 25px;
+        }
+
+            span.round-tab i {
+                color: #555555;
+            }
+
+        .wizard li.active span.round-tab {
+            background: #fff;
+            border: 2px solid #5bc0de;
+        }
+
+            .wizard li.active span.round-tab i {
+                color: #5bc0de;
+            }
+
+        span.round-tab:hover {
+            color: #333;
+            border: 2px solid #333;
+        }
+
+        .wizard .nav-tabs > li {
+            width: 32%;
+        }
+
+        .wizard li:after {
+            content: " ";
+            position: absolute;
+            left: 46%;
+            opacity: 0;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 5px solid transparent;
+            border-bottom-color: #5bc0de;
+            transition: 0.1s ease-in-out;
+        }
+
+        .wizard li.active:after {
+            content: " ";
+            position: absolute;
+            left: 46%;
+            opacity: 1;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 10px solid transparent;
+            border-bottom-color: #5bc0de;
+        }
+
+        .wizard .nav-tabs > li a {
+            width: 70px;
+            height: 70px;
+            margin: 20px auto;
+            border-radius: 100%;
+            padding: 0;
+        }
+
+            .wizard .nav-tabs > li a:hover {
+                background: transparent;
+            }
+
+        .wizard .tab-pane {
+            position: relative;
+            padding-top: 50px;
+        }
+
+        .wizard h3 {
+            margin-top: 0;
+        }
+
+        .step1 .row {
+            margin-bottom: 10px;
+        }
+
+        .step_21 {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .step33 {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .dropselectsec {
+            width: 68%;
+            padding: 6px 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #333;
+            margin-left: 10px;
+            outline: none;
+            font-weight: normal;
+        }
+
+        .dropselectsec1 {
+            width: 74%;
+            padding: 6px 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #333;
+            margin-left: 10px;
+            outline: none;
+            font-weight: normal;
+        }
+
+        .mar_ned {
+            margin-bottom: 10px;
+        }
+
+        .wdth {
+            width: 25%;
+        }
+
+        .birthdrop {
+            padding: 6px 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #333;
+            margin-left: 10px;
+            width: 16%;
+            outline: 0;
+            font-weight: normal;
+        }
+
+
+        /* according menu */
+        #accordion-container {
+            font-size: 13px
+        }
+
+        .accordion-header {
+            font-size: 13px;
+            background: #ebebeb;
+            margin: 5px 0 0;
+            padding: 7px 20px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 400;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px
+        }
+
+        .unselect_img {
+            width: 18px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .active-header {
+            -moz-border-radius: 5px 5px 0 0;
+            -webkit-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+            background: #F53B27;
+        }
+
+            .active-header:after {
+                content: "\f068";
+                font-family: 'FontAwesome';
+                float: right;
+                margin: 5px;
+                font-weight: 400
+            }
+
+        .inactive-header {
+            background: #333;
+        }
+
+            .inactive-header:after {
+                content: "\f067";
+                font-family: 'FontAwesome';
+                float: right;
+                margin: 4px 5px;
+                font-weight: 400
+            }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-top: 0;
+            -moz-border-radius: 0 0 5px 5px;
+            -webkit-border-radius: 0 0 5px 5px;
+            border-radius: 0 0 5px 5px
+        }
+
+            .accordion-content a {
+                text-decoration: none;
+                color: #333;
+            }
+
+            .accordion-content td {
+                border-bottom: 1px solid #dcdcdc;
+            }
+
+
+
+        @media( max-width : 585px ) {
+
+            .wizard {
+                width: 90%;
+                height: auto !important;
+            }
+
+            span.round-tab {
+                font-size: 16px;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+            }
+
+            .wizard .nav-tabs > li a {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+            }
+
+            .wizard li.active:after {
+                content: " ";
+                position: absolute;
+                left: 35%;
+            }
+        }
+    .modal-dialog {width:600px;}
+    .thumbnail {margin-bottom:6px;}
+</style>
+    <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <h3 class="modal-title">Heading</h3>
+                </div>
+                <div id="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="wizard">
+                    <div class="wizard-inner">
+                        <div class="connecting-line"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Paso 1">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Paso 2">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-picture"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <!--
+                                <li role="presentation" class="disabled">
+                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Paso 3">
+                                        <span class="round-tab">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                    </a>
+                                </li>-->
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Completo">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="step1">
+
+                            <!--<input type="file" id="fileSelectedImagenPrincipal" value="Seleccionar archivo" accept="image/*"
+                                    ngf-max-height="1000" ngf-max-size="1MB" />
+                                <input type="file" custom-on-change="uploadFile" onchange="angular.element(this).scope().uploadImage()">
+                                   -->
+
+                            <!--  <input type="file" ng-change="onFileChange($event)">
+
+                                    <input type="file" ngf-select="uploadFiles($file);" value="Seleccionar archivo"
+                                           accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" />
+                                   <br><br>
+                                    Archivo en el disco:
+                                    <div style="font:smaller">
+                                        {{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                                        <span class="progress" ng-show="f.progress >= 0">
+                                            <div style="width:{{f.progress}}%" ng-bind="f.progress + '%' "></div>
+                                        </span>
+                                    </div>
+
+                                    {{errorMsg}}-->
+
+
+                            <h2 style="margin-top:-34px !important;">
+                                <center>Información principal de la galeria.</center>
+                            </h2>
+                            <div class="step2">
+                                <div class="step_21">
+
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group" style="margin-top:-10px !important;margin-bottom:-10px !important;">
+                                                        <label for="nombre" style="float:left !important;">Nombre:</label>
+                                                        <input id="nombre" name="nombre" ng-model="newGaleria.nombre" type="text"
+                                                            class="form-control" placeholder="Nombre de la galeria de imagenes"
+                                                            required />
+                                                    </div>
+                                                    <div class="form-group" style="margin-top:-10px !important;margin-bottom:-10px !important;">
+                                                        <label for="descripcion" style="float:left !important;">Descripción:</label>
+                                                        <textarea id="descripcion" ng-model="newGaleria.descripcion" class="form-control"
+                                                            name="descripcion" placeholder="Descripción de la galeria (Se acepta HTML)"
+                                                            rows="9" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group" style="margin-top:-10px !important;margin-bottom:-10px !important;">
+                                                        <label for="categoriaGaleria">Categoria</label>
+                                                        <select name="categoriaGaleria" id="categoriaGaleria" class="form-control"
+                                                            ng-model="newGaleria.categoriaGaleria" ng-options="model.categoria for model in categoriaGaleria track by model._id">
+                                                            <option value="" selected="selected">Seleccione una
+                                                                categoria</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" style="margin-top:-10px !important;margin-bottom:-10px !important;">
+                                                        <label for="tags">Meta Tags</label>
+                                                        <input ng-model="newGaleria.metatags" type="text" class="form-control"
+                                                            id="tags" placeholder="Tags" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="well well-sm" style="height: 54px;">
+                                                        <input style="float:left; width:49%; margin-right: 6px;"
+                                                            ng-model="newGaleria.fechaRegistro" type="date" class="form-control"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="well well-sm" style="height: 54px;">
+                                                        <select style="float:left; width:49%" ng-model="newGaleria.activo"
+                                                            class="form-control">
+                                                            <option value="0">Borrador</option>
+                                                            <option value="1">Publicado</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-inline pull-right">
+                                <li><button type="button" class="btn btn-primary next-step">Continuar</button></li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="step2">
+                            <h5><strong>Mas información</strong></h5>
+                            <div class="step33">
+                                <!--<h5><strong>Mas información</strong></h5>
+                                    <hr>-->
+                                <br>
+                                <div class="row mar_ned">
+                                    <!--<div class="col-md-4 col-xs-3">
+                                            <p align="right">
+                                                <stong>Imagen Principal</stong>
+                                            </p>
+                                        </div>-->
+                                    <div class="col-md-4 col-xs-4">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-8 m-auto">
+                                                    <h2 class="text-center display-4 my-4">Imagen Principal</h2>
+                                                    <!--<form >
+                                                        <form id="formUpload" action="/upload" method="POST" enctype="multipart/form-data">  </form>-->
+
+                                                    <form role="form" id="formUploadG" novalidate>
+                                                        <div class="custom-file mb-3">
+                                                            <input type="file" name="fileG" id="fileG" class="custom-file-input"
+                                                                onchange="encodeGaleriaImageFileAsURL();" accept="image/*"
+                                                                ngf-max-height="1000" ngf-max-size="1MB">
+                                                            <label for="fileG" class="custom-file-label">Buscar archivo</label>
+                                                            <div id="imgTestG" style="max-width:250px !important; float: left;"></div>
+                                                        </div>
+                                                        <input type="submit" value="Subir Imagen" class="btn btn-primary btn-block">
+
+                                                    </form>
+                                                    <hr>
+                                                    <img src="image/{{newGaleria.imagenPrincipal}}" alt="" style="max-width:250px;">
+                                                    <div ng-if="files">
+
+                                                        <!--<ul>
+                                                                <li ng-repeat="custInfo in files" style="max-width:250px;">
+                                                                    <img src="image/{{custInfo.filename}}" alt="" style="max-width:250px;">
+                                                                    <button type="button" ng-click="eliminarImagen(custInfo._id);"
+                                                                        class="btn btn-danger btn-block mt-4">Eliminar</button>
+
+                                                                </li>
+                                                            </ul>-->
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-xs-8">
+                                        <div class="container">
+                                            <div class="row">
+                                                <h2>Imagenes de la Galeria: <strong>{{newGaleria.nombre}}</strong></h2>
+                                                <form role="form" id="formUploadGA" novalidate>
+                                                    <div class="custom-file mb-3">
+                                                        <input type="file" name="fileGA" id="fileGA" class="custom-file-input"
+                                                            onchange="encodeGaleriaGAImageFileAsURL();" accept="image/*"
+                                                            ngf-max-height="1000" ngf-max-size="1MB">
+                                                        <label for="fileGA" class="custom-file-label">Buscar Archivo</label>
+                                                        <div id="imgTestGA" style="max-width:250px !important; float: left;"></div>
+                                                        <input type="submit" value="Subir Imagen y Guardar Foto" class="btn btn-primary btn-block">
+                                                    </div>
+                                                </form>
+                                                <hr>
+                                                <!--<img src="image/{{newGaleria.imagenPrincipal}}" alt="" style="max-width:250px;">-->
+                                                <div ng-if="files">
+
+                                                    <!--<ul>
+                                                                <li ng-repeat="custInfo in files" style="max-width:250px;">
+                                                                    <img src="image/{{custInfo.filename}}" alt="" style="max-width:250px;">
+                                                                    <button type="button" ng-click="eliminarImagen(custInfo._id);"
+                                                                        class="btn btn-danger btn-block mt-4">Eliminar</button>
+
+                                                                </li>
+                                                            </ul>-->
+                                                </div>
+                                            </div>
+                                            <div ng-repeat="model in fotos" class="col-lg-3 col-sm-4 col-xs-6">
+                                                <a href="#">
+                                                    <img title="{{model.nombre}}" class="thumbnail img-responsive"
+                                                        ng-click="cargarMini(this);" src="image/{{model.nombre}}" style="width:250px !important;">
+                                                </a>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
+                            <li><button ng-show="!selected" type="button" ng-click="registrarGaleria()" class="btn btn-primary btn-info-full next-step">Guardar</button></li>
+                            <li><button ng-show="selected" type="button" ng-click="modificarGaleria()" class="btn btn-primary btn-info-full next-step">Guardar
+                                    Cambios</button></li>
+                        </ul>
+                    </div>
+                    <!--                            <div class="tab-pane" role="tabpanel" id="step3">
+                                <div class="step1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input id="ratings-hidden" name="rating" type="hidden">
+                                                    <div class="text-center">
+                                                            <div class="stars starrr" data-rating="0"></div>
+
+                                                                <a class="btn btn-danger btn-sm" href="#" id="close-review-box"
+                                                                    style="display:none; margin-right: 10px;">
+                                                                    <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                                <button class="btn btn-success btn-lg" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="error-message">
+                                            </div>
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
+                                                <li><button type="button" ng-click="registrarGaleria()" class="btn btn-primary btn-info-full next-step">Guardar
+                                                        y Continuar</button></li>
+                                            </ul>
+                                        </div>-->
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                        <div class="step44">
+                            <h5 style="text-align:center; font-size:1.8rem;">
+                                Galeria guardada exitosamente
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </h5>
+
+                            <ul class="list-inline pull-right">
+                                <li><button type="button" ng-click="cargarEnlace('galeria')" class="btn btn-success prev-step">Ir
+                                        al listado de galerias</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+        </section>
+    </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>

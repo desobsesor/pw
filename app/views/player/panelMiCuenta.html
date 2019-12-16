@@ -1,0 +1,1223 @@
+﻿<div ng-app="MainAppMiCuenta" ng-controller="mainControllerMiCuenta">
+    <section style="margin-top:50px;">
+        <style>
+
+            @font-face {
+                font-family: 'weather';
+                src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot');
+                src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.eot?#iefix') format('embedded-opentype'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.woff') format('woff'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.ttf') format('truetype'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/artill_clean_icons-webfont.svg#artill_clean_weather_iconsRg') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            html {
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+                padding: 45px 0;
+                font: 14px 'Open Sans', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                color: #8F7F70;
+                background: #FFFFFF;
+                /*background: #dec8bb;
+            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RlYzhiYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjMxJSIgc3RvcC1jb2xvcj0iI2FjOGU3NCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iI2JkYTI4NSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4NzZkNTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+            background: -moz-linear-gradient(top, #dec8bb 0%, #ac8e74 31%, #bda285 66%, #876d52 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dec8bb), color-stop(31%,#ac8e74), color-stop(66%,#bda285), color-stop(100%,#876d52));
+            background: -webkit-linear-gradient(top, #dec8bb 0%,#ac8e74 31%,#bda285 66%,#876d52 100%);
+            background: -o-linear-gradient(top, #dec8bb 0%,#ac8e74 31%,#bda285 66%,#876d52 100%);
+            background: -ms-linear-gradient(top, #dec8bb 0%,#ac8e74 31%,#bda285 66%,#876d52 100%);
+            background: linear-gradient(to bottom, #dec8bb 0%,#ac8e74 31%,#bda285 66%,#876d52 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dec8bb', endColorstr='#876d52',GradientType=0 ); */
+            }
+
+            /*-- BS3 Modified Classes --*/
+            .panel {
+                border: none;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+                border-radius: 5px;
+            }
+
+            .panel-body {
+                padding: 20px;
+            }
+
+            .panel-heading {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            .panel-footer {
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+
+
+
+            /*-- Common Use Classes --*/
+            .btn-ui {
+                background-color: #E55F3A;
+                border-color: #C54A28;
+                color: #fff;
+            }
+
+                .btn-ui:hover {
+                    background-color: #E0624C;
+                    color: #fff;
+                }
+
+            .list-block {
+                display: table;
+                width: 100%;
+                border-collapse: collapse;
+                border: none;
+            }
+
+                .list-block ul {
+                    display: table-row;
+                }
+
+                .list-block li {
+                    display: table-cell;
+                    margin: 0;
+                }
+
+            .pad-left-0 {
+                padding-left: 0px;
+            }
+
+            .pad-right-0 {
+                padding-right: 0px;
+            }
+
+            .mrg-btm-10 {
+                margin-bottom: 10px;
+            }
+
+            .mrg-btm-20 {
+                margin-bottom: 20px;
+            }
+
+
+
+
+            /*-- Weather Widget --*/
+            #weather-widget i {
+                color: #fff;
+                font-family: weather;
+                font-size: 1.5em;
+                font-weight: normal;
+                font-style: normal;
+                line-height: 1.0;
+            }
+
+            #weather-widget .panel-heading {
+                background-color: #55BC75;
+                color: #fff;
+                padding-bottom: 20px;
+            }
+
+            #weather-widget #current {
+                font-size: 4em;
+                margin-bottom: -20px;
+            }
+
+            #weather-widget .panel-footer {
+                background-color: #F5F0EC;
+                padding: 20px;
+                border: none;
+            }
+
+
+            /* Weather icons */
+            .icon-0:before {
+                content: ":";
+            }
+
+            .icon-1:before {
+                content: "p";
+            }
+
+            .icon-2:before {
+                content: "S";
+            }
+
+            .icon-3:before {
+                content: "Q";
+            }
+
+            .icon-4:before {
+                content: "S";
+            }
+
+            .icon-5:before {
+                content: "W";
+            }
+
+            .icon-6:before {
+                content: "W";
+            }
+
+            .icon-7:before {
+                content: "W";
+            }
+
+            .icon-8:before {
+                content: "W";
+            }
+
+            .icon-9:before {
+                content: "I";
+            }
+
+            .icon-10:before {
+                content: "W";
+            }
+
+            .icon-11:before {
+                content: "I";
+            }
+
+            .icon-12:before {
+                content: "I";
+            }
+
+            .icon-13:before {
+                content: "I";
+            }
+
+            .icon-14:before {
+                content: "I";
+            }
+
+            .icon-15:before {
+                content: "W";
+            }
+
+            .icon-16:before {
+                content: "I";
+            }
+
+            .icon-17:before {
+                content: "W";
+            }
+
+            .icon-18:before {
+                content: "U";
+            }
+
+            .icon-19:before {
+                content: "Z";
+            }
+
+            .icon-20:before {
+                content: "Z";
+            }
+
+            .icon-21:before {
+                content: "Z";
+            }
+
+            .icon-22:before {
+                content: "Z";
+            }
+
+            .icon-23:before {
+                content: "Z";
+            }
+
+            .icon-24:before {
+                content: "E";
+            }
+
+            .icon-25:before {
+                content: "E";
+            }
+
+            .icon-26:before {
+                content: "3";
+            }
+
+            .icon-27:before {
+                content: "a";
+            }
+
+            .icon-28:before {
+                content: "A";
+            }
+
+            .icon-29:before {
+                content: "a";
+            }
+
+            .icon-30:before {
+                content: "A";
+            }
+
+            .icon-31:before {
+                content: "6";
+            }
+
+            .icon-32:before {
+                content: "1";
+            }
+
+            .icon-33:before {
+                content: "6";
+            }
+
+            .icon-34:before {
+                content: "1";
+            }
+
+            .icon-35:before {
+                content: "W";
+            }
+
+            .icon-36:before {
+                content: "1";
+            }
+
+            .icon-37:before {
+                content: "S";
+            }
+
+            .icon-38:before {
+                content: "S";
+            }
+
+            .icon-39:before {
+                content: "S";
+            }
+
+            .icon-40:before {
+                content: "M";
+            }
+
+            .icon-41:before {
+                content: "W";
+            }
+
+            .icon-42:before {
+                content: "I";
+            }
+
+            .icon-43:before {
+                content: "W";
+            }
+
+            .icon-44:before {
+                content: "a";
+            }
+
+            .icon-45:before {
+                content: "S";
+            }
+
+            .icon-46:before {
+                content: "U";
+            }
+
+            .icon-47:before {
+                content: "S";
+            }
+
+
+
+            /*-- Profile Widget --*/
+            #profile-widget .panel-heading {
+                min-height: 200px;
+                background: #fff url(http://4hdwallpapers.com/wp-content/uploads/2013/04/The-Lion-King-Desktop-1024x640.jpg) no-repeat top center;
+                background-size: cover;
+            }
+
+            #profile-widget .media-heading {
+                color: #5B5147;
+            }
+
+            #profile-widget .panel-body {
+                padding: 20px;
+            }
+
+                #profile-widget .panel-body .img-circle {
+                    height: 90px;
+                    width: 90px;
+                    padding: 8px;
+                    border: 1px solid #e2dfdc;
+                }
+
+            #profile-widget .panel-footer {
+                padding: 0px;
+                border: none;
+            }
+
+                #profile-widget .panel-footer .btn-group .btn {
+                    border: none;
+                    font-size: 1.2em;
+                    background-color: #F6F1ED;
+                    color: #BAACA3;
+                    border-top-left-radius: 0px;
+                    border-top-right-radius: 0px;
+                    padding: 15px 0;
+                }
+
+                    #profile-widget .panel-footer .btn-group .btn:hover {
+                        color: #F6F1ED;
+                        background-color: #8F7F70;
+                    }
+
+                #profile-widget .panel-footer .btn-group > .btn:not(:first-child) {
+                    border-left: 1px solid #fff;
+                }
+
+                #profile-widget .panel-footer .btn-group .highlight {
+                    color: #E56E4C;
+                }
+
+
+
+            /*-- Login Widget --*/
+            #login-widget .panel-body .input-group {
+                margin-bottom: 15px;
+            }
+
+            #login-widget .panel-footer {
+                padding: 0px;
+                border: none;
+            }
+
+                #login-widget .panel-footer .login-btn {
+                    padding: 20px 20px 10px 20px;
+                }
+
+                #login-widget .panel-footer .facebook {
+                    background-color: #5F90B0;
+                    color: #fff;
+                    padding: 15px;
+                    display: block;
+                }
+
+
+
+            /*-- Pie Chart Widget --*/
+            #pie-chart-widget .panel-body {
+                padding: 0px;
+            }
+
+            #pie-chart-widget .panel-footer {
+                background-color: #fff;
+                padding: 0px;
+                margin-top: 20px;
+            }
+
+                #pie-chart-widget .panel-footer .btn {
+                    border: none;
+                    border-top-left-radius: 0px;
+                    border-top-right-radius: 0px;
+                    padding: 20px 0px;
+                    color: #fff;
+                    background-color: #776B5F;
+                    border-top: 3px solid #6d6257;
+                }
+
+                    #pie-chart-widget .panel-footer .btn:hover {
+                        background-color: #62584C;
+                        border-color: #52483F;
+                    }
+
+            #pie-chart-widget h2 {
+                font-weight: 700;
+                margin: 3px 0 0 0;
+            }
+
+            #pie-chart-widget .legend li {
+                background-color: #F5F0EC;
+                padding: 20px 10px;
+            }
+
+                #pie-chart-widget .legend li:not(:first-child) {
+                    border-left: 1px solid #fff;
+                }
+
+            #pie-chart-widget .legend .video {
+                border-top: 4px solid #4DAF7C;
+            }
+
+            #pie-chart-widget .legend .audio {
+                border-top: 4px solid #EAC85D;
+            }
+
+            #pie-chart-widget .legend .photo {
+                border-top: 4px solid #E25331;
+            }
+
+
+
+
+
+            /*-- Line Chart Widget --*/
+            #myLineChart {
+                background-color: #55BC75;
+                padding: 0px 5px;
+                margin: 0px;
+            }
+
+            #myBarChart {
+                margin-top: 10px;
+            }
+
+            #line-chart-widget .panel-heading {
+                background-color: #55BC75;
+                color: #fff;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+
+                #line-chart-widget .panel-heading small {
+                    color: #fff;
+                }
+
+                #line-chart-widget .panel-heading .label {
+                    background-color: rgba(0,0,0,0.1);
+                    padding: 5px;
+                }
+
+            #line-chart-widget .panel-body {
+                padding: 0px;
+            }
+
+            #line-chart-widget .panel-footer {
+                background-color: #fff;
+                padding: 20px;
+                margin-top: 0px;
+                border-top: none;
+            }
+
+                #line-chart-widget .panel-footer li {
+                    padding: 10px 0;
+                }
+
+            #line-chart-widget h3 {
+                font-weight: 700;
+                margin: 0px;
+            }
+
+            #line-chart-widget li {
+                width: 50%;
+            }
+
+            #line-chart-widget .legend li {
+                background-color: #F5F0EC;
+                padding: 20px 0;
+            }
+
+                #line-chart-widget .legend li:not(:first-child) {
+                    border-left: 1px solid #fff;
+                }
+
+            #line-chart-widget .chart-block > div {
+                margin-top: 20px;
+                width: 55%;
+            }
+
+                #line-chart-widget .chart-block > div:last-child {
+                    padding-left: 15px;
+                    width: 45%;
+                }
+
+            #line-chart-widget .chart-block .change {
+                color: #fff;
+                font-size: 1.6em;
+                border-radius: 5px;
+                padding: 10px;
+                margin-top: 20px;
+                background-color: #55BC75;
+                width: 100%;
+            }
+
+                #line-chart-widget .chart-block .change i {
+                    font-size: .6em;
+                }
+
+
+
+
+
+            /*-- Social Button Widget --*/
+            #social-widget {
+                border: 0px;
+            }
+
+                #social-widget .btn:not(:first-child) {
+                    border-top: 1px solid #F5F0EC;
+                }
+
+                #social-widget .btn {
+                    background-color: #fff;
+                    border: 0px;
+                    padding: 20px;
+                }
+
+                #social-widget .facebook .fa-circle {
+                    color: #5F90AE;
+                }
+
+                #social-widget .facebook:hover {
+                    background-color: #5F90AE;
+                }
+
+                #social-widget .pinterest .fa-pinterest {
+                    color: #D34F4D;
+                }
+
+                #social-widget .pinterest:hover {
+                    background-color: #D34F4D;
+                }
+
+                    #social-widget .pinterest:hover .fa-pinterest {
+                        color: #fff;
+                    }
+
+                #social-widget .twitter .fa-circle {
+                    color: #2AB5DE;
+                }
+
+                #social-widget .twitter:hover {
+                    background-color: #2AB5DE;
+                }
+
+
+
+
+
+            /*-- Navigation Widget --*/
+            #nav-widget {
+                border: 0px;
+                margin-bottom: 20px;
+                /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);*/
+            }
+
+                #nav-widget .btn-group:not(:first-child) {
+                    border-left: 1px solid #F5F0EC;
+                }
+
+                #nav-widget .btn {
+                    background-color: #55BC75;
+                    border: 0px;
+                    padding: 20px;
+                    font-weight: 600;
+                    border-bottom: 3px solid #fff;
+                }
+
+                    #nav-widget .btn:hover {
+                        background-color: #F8F3F0;
+                        color: #64584C;
+                        border-bottom: 3px solid #55BC75;
+                    }
+
+                #nav-widget i.fa {
+                    padding-right: 5px;
+                }
+
+                #nav-widget .badge {
+                    font-size: .7em;
+                    background-color: #E7663F;
+                    margin-left: 4px;
+                    top: -10px;
+                }
+
+
+
+
+
+            /*-- User Widget --*/
+            #user-widget {
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+            }
+
+                #user-widget .list-group-item {
+                    border: 0;
+                    color: #8F7F70;
+                    padding: 15px;
+                    border-left: 3px solid #fff;
+                }
+
+                #user-widget a.list-group-item:hover {
+                    background-color: #F8F3F0;
+                    color: #64584C;
+                    border-left: 3px solid #55BC75;
+                }
+
+                    #user-widget a.list-group-item:hover i.fa {
+                        color: #E35935;
+                    }
+
+                #user-widget .heading {
+                    color: #8F7F70;
+                    background-color: #B1A599;
+                    border-left: 3px solid #B1A599;
+                }
+
+                    #user-widget .heading .text-wrap {
+                        padding: 20px 0;
+                    }
+
+                #user-widget .img-circle {
+                    height: 90px;
+                    width: 90px;
+                    padding: 8px;
+                    border: 1px solid #9C9084;
+                    margin-right: 10px;
+                    float: left;
+                }
+
+                #user-widget .heading .list-group-item-heading {
+                    font-weight: 600;
+                    color: #fff;
+                }
+
+
+
+
+
+            @media only screen and (max-width: 767px) { /* phones */
+                #nav-widget .btn {
+                    text-align: left;
+                }
+
+                #nav-widget .btn-group:not(:first-child) {
+                    margin: 0px;
+                    border-left: 0px;
+                    border-top: 1px solid #F5F0EC;
+                }
+
+                .btn-group > .btn {
+                    border-radius: 0;
+                }
+
+                    .btn-group > .btn:last-child {
+                        border-bottom-right-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                    }
+
+                .btn-group-justified > .btn, .btn-group-justified > .btn-group {
+                    float: left;
+                    width: 100%;
+                }
+
+                .btn-group > .btn-group > .btn {
+                    border-radius: 0;
+                }
+
+                .btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
+                    margin-left: 0px;
+                }
+
+                .btn-group > .btn-group:first-child > .btn:last-child {
+                    border-top-left-radius: 3px;
+                    border-top-right-radius: 3px;
+                }
+
+                .btn-group > .btn-group:last-child > .btn:last-child {
+                    border-bottom-left-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
+            }
+
+            .thumb {
+                width: 24px;
+                height: 24px;
+                float: none;
+                position: relative;
+                top: 7px;
+            }
+
+            form .progress {
+                line-height: 15px;
+            }
+
+            .progress {
+                display: inline-block;
+                width: 100px;
+                border: 3px groove #CCC;
+            }
+
+                .progress div {
+                    font-size: smaller;
+                    background: orange;
+                    width: 0;
+                }
+        </style>
+        <!-- This is what you need -->
+        <!-- Docs at http://simpleweatherjs.com -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
+        <!-- Docs at http://www.chartjs.org -->
+        <script src="//www.chartjs.org/assets/Chart.min.js"></script>
+        <!-- //#region COMPONENTES WINDOWS-->
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control " type="text" placeholder="Mohsin">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control " type="text" placeholder="Irshad">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Eliminar este jugador</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-warning-sign">
+                            </span> Esta de acuerdo con eliminar este jugador?
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="actualizarImagenFoto" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Actualizar imagen principal</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-warning-sign">
+                            </span> Por favor seleccione una imagen para actualizar?
+                        </div>
+                        <!--<button id="select_resume_btn" class="btn btn-default" type="file"
+                                ngf-select="uploadFiles($file)"
+                                ngf-pattern="'.docx,.pdf'"
+                                accept=".docx,.pdf"
+                                ngf-max-size="5MB">
+                            Select Resume
+                        </button>-->
+
+
+                        <!--<input type="file" ng-change="onFileChange($event)">
+
+                        <input type="file" ngf-select="uploadFiles($file);" value="Seleccionar archivo"
+                               accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" />
+                        <br><br>
+                        Archivo en el disco:
+                        <div style="font:smaller">
+                            {{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                            <span class="progress" ng-show="f.progress >= 0">
+                                <div style="width:{{f.progress}}%" ng-bind="f.progress + '%' "></div>
+                            </span>
+                        </div>
+
+                        {{errorMsg}}-->
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- //#endregion COMPONENTES WINDOWS-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--
+                ****** NAVIGATION WIDGET *******
+                -->
+                    <div id="nav-widget" class="btn-group">
+                        <div class="btn-group">
+                            <button ng-click="alerta();" type="button" class="btn"><i class="fa fa-map-marker fa-2x"></i>  Check In<span class="badge">6</span></button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn text-uppercase"><i class="fa fa-bell fa-2x"></i>  Events</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn text-uppercase"><i class="fa fa-user fa-2x"></i>  Account</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn text-uppercase"><i class="fa fa-cog fa-2x"></i>  Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!-- COLUMN ONE -->
+                <div class="col-sm-6 col-md-4">
+                    <!--
+                ****** LINE CHART WIDGET *******
+                -->
+                    <div id="line-chart-widget" class="panel">
+                        <div class="panel-heading">
+                            <h4 class="text-uppercase"><strong>Apple Inc.</strong><span class="label pull-right">107.26 <i class="fa fa-plus"></i>0.23(0.10%)</span><br><small>Nasdaq: AAPL</small></h4>
+                        </div>
+                        <div class="panel-body">
+                            <canvas id="myLineChart"></canvas>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="list-block">
+                                <ul class="text-center legend">
+                                    <li>
+                                        <h3>13.5 M</h3>
+                                        Shares Traded
+                                    </li>
+                                    <li>
+                                        <h3>28.44 B</h3>
+                                        Market Cap
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="chart-block clearfix">
+                                <div class="pull-left">
+                                    Monthly Volume
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
+                                <div class="pull-right">
+                                    Yearly Change<br>
+                                    <div class="change text-center"><i class="fa fa-plus"></i> 86.01</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <!--
+                        ****** SOCIAL BUTTON WIDGET *******
+                        -->
+                            <div id="social-widget" class="btn-group-vertical mrg-btm-20">
+                                <button type="button" class="btn facebook"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></button>
+                                <button type="button" class="btn pinterest"><i class="fa fa-pinterest fa-3x"></i></button>
+                                <button type="button" class="btn twitter"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></button>
+                            </div>
+                        </div>
+                        <div class="col-xs-9">
+                            <!--
+                        ****** WEATHER WIDGET *******
+                        -->
+                            <div id="weather-widget" class="panel">
+                                <div class="panel-heading text-center">
+                                    <div id="current"></div>
+                                    New York, NY
+                                </div>
+                                <div class="panel-footer">
+                                    <div id="hiTemp" class="col-xs-6 text-center"></div>
+                                    <div id="wind" class="col-xs-6 text-center"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- COLUMN TWO -->
+                <div class="col-sm-6 col-md-4">
+                    <!--
+                ****** CHART WIDGET *******
+                -->
+                    <div id="pie-chart-widget" class="panel">
+                        <div class="panel-heading text-center">
+                            <h5 class="text-uppercase"><strong>Datos en el Perfil deportivo</strong></h5>
+                        </div>
+                        <div class="panel-body">
+                            <!--<div>
+                                <input type="file" onchange="onFileSelect(this)" name="file">Select Files</input>
+                                <span ng-show="fileMsg">{{fileMsg}}</span>
+                            </div>-->
+
+Por aca...
+                                <input type="file" id="fileSelected" />
+
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="list-block">
+                                <ul class="text-center legend">
+                                    <li class="video" style="margin-right: 1px;">
+                                        Videos
+                                        <h2>42%</h2>
+                                    </li>
+                                    <li class="photo">
+                                        Fotos
+                                        <h2>
+                                            60
+                                            1%
+                                        </h2>
+                                    </li>
+                                    <li class="audio" style="margin-left: 1px;">
+                                        Otros
+                                        <h2>10%</h2>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group btn-group-justified text-uppercase text-center">
+                                <a class="btn btn-default" role="button"><i class="fa fa-cloud-upload fa-2x"></i><br><small>Upload Files</small></a>
+                                <a class="btn btn-default" role="button"><i class="fa fa-share-alt fa-2x"></i><br><small>Share Link</small></a>
+                                <a class="btn btn-default" role="button"><i class="fa fa-history fa-2x"></i><br><small>Back Up</small></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                ****** LOGIN WIDGET *******
+                -->
+                    <div id="login-widget" class="panel">
+                        <form id="loginform" class="form-horizontal" role="form">
+                            <div class="panel-heading text-center">
+                                <h5 class="text-uppercase"><strong>Login to your account</strong></h5>
+                            </div>
+                            <div class="panel-body">
+                                <label for="login-email">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="login-email" type="text" class="form-control input-lg" name="email" value="" placeholder="email">
+                                </div>
+                                <label for="login-email">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="login-password" type="password" class="form-control input-lg" name="password" placeholder="password">
+                                </div>
+                            </div>
+                            <div class="panel-footer text-center">
+                                <div class="login-btn">
+                                    <a href="#" class="btn btn-ui btn-lg btn-block mrg-btm-10"><i class="fa fa-play-circle"></i> Sign In</a>
+                                    <a href="#"><small>Forgot Username or Password?</small></a>
+                                </div>
+                                <a href="#" class="facebook"><i class="fa fa-lg fa-facebook-square"></i> Login with Facebook</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- COLUMN THREE -->
+                <div class="col-sm-6 col-md-4 ">
+                    <!--
+                ****** PROFILE WIDGET *******
+                -->
+                    <div id="profile-widget" class="panel">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/flashmurphy/128.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <h2 class="media-heading">John Raymons</h2>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="btn-group btn-group-justified">
+                                <a class="btn btn-default" role="button"><i class="fa fa-eye"></i> 172</a>
+                                <a class="btn btn-default" role="button"><i class="fa fa-comment"></i> 34</a>
+                                <a class="btn btn-default highlight" role="button"><i class="fa fa-heart"></i> 210</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  ****** USER WIDGET ******* -->
+
+                    <div id="user-widget" class="list-group">
+                        <div class="list-group-item heading">
+                            <center><img class="media-object img-circle" style="width:80%; height:80%;" data-ng-src="{{imgsource}}" /></center>
+                            <div class="text-wrap">
+                                <h4 class="list-group-item-heading" data-ng-bind="nombreCompleto()"></h4>
+                                <p class="list-group-item-text">150 seguidores </p>
+                                <p data-placement="top" data-toggle="tooltip" title="Editar foto de perfil">
+                                    <button class="btn btn-danger btn-xs" data-title="Editar foto de perfil" data-toggle="modal" data-target="#actualizarImagenFoto">
+                                        <span class="glyphicon glyphicon-ok-sign"></span>
+                                    </button>
+                                </p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-user fa-lg pull-right"></i>
+                            <p class="list-group-item-text">Editar perfil</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-bar-chart-o fa-lg pull-right"></i>
+                            <p class="list-group-item-text">Estadisticas Web</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-wrench fa-lg pull-right"></i>
+                            <p class="list-group-item-text">Otros...</p>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-calendar fa-lg pull-right"></i>
+                            <p class="list-group-item-text">Eventos</p>
+                        </a>
+                        <p data-placement="top" data-toggle="tooltip" title="Edit" />
+                        <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+
+                        <p data-placement="top" data-toggle="tooltip" title="Enviar Correo" />
+                        <button ng-click="enviarCorreo()" class="btn btn-primary btn-sm" data-title="Edit">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                // Docs at http://simpleweatherjs.com
+                $.simpleWeather({
+                    location: 'New York, NY',
+                    woeid: '',
+                    unit: 'f',
+                    success: function (weather) {
+                        current = weather.temp + '° <i class="icon-' + weather.code + '"></i>';
+                        hiTemp = 'Hi ' + weather.high + '°';
+                        wind = weather.wind.speed + ' ' + weather.units.speed;
+
+                        $("#weather-widget #current").html(current);
+                        $("#weather-widget #hiTemp").html(hiTemp);
+                        $("#weather-widget #wind").html(wind);
+                    },
+                    error: function (error) {
+                        $("#weather").html('<p>' + error + '</p>');
+                    }
+                });
+
+
+
+                //Docs at http://www.chartjs.org
+                var pie_data = [
+                    {
+                        value: 300,
+                        color: "#4DAF7C",
+                        highlight: "#55BC75",
+                        label: "Video"
+                    },
+                    {
+                        value: 50,
+                        color: "#EAC85D",
+                        highlight: "#f9d463",
+                        label: "Audio"
+                    },
+                    {
+                        value: 100,
+                        color: "#E25331",
+                        highlight: "#f45e3d",
+                        label: "Photos"
+                    },
+                    {
+                        value: 35,
+                        color: "#F4EDE7",
+                        highlight: "#e0dcd9",
+                        label: "Remaining"
+                    }
+                ]
+
+                var line_data = {
+                    labels: ["10:00am", "10:05am", "10:10am", "10:15am", "10:20am", "10:25am", "10:30am", "10:35am", "10:40am", "10:45am", "10:50am", "10:55am", "11:00am", "11:05am"],
+                    datasets: [
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(77, 175, 124,1)",
+                            strokeColor: "rgba(255,255,255,1)",
+                            pointColor: "rgba(255,255,255,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(151,187,205,1)",
+                            data: [107.18, 107.13, 107.00, 106.89, 106.91, 107.12, 107.06, 107.04, 107.10, 107.14, 107.16, 107.20, 107.21, 107.26]
+                        }
+                    ]
+                };
+
+
+                var bar_data = {
+                    labels: ["Monday", "Tuesday", "Wednesday", "Thrusday", "May", "June", "July"],
+                    datasets: [
+                        {
+                            fillColor: "rgba(226,83,49,1)",
+                            strokeColor: "rgba(226,83,49,1)",
+                            highlightFill: "rgba(226,83,49,0.5)",
+                            highlightStroke: "rgba(226,83,49,0.5)",
+                            data: [65, 59, 80, 81, 56, 55, 40]
+                        }
+                    ]
+                };
+
+
+                // PIE CHART WIDGET
+                var ctx = document.getElementById("myPieChart").getContext("2d");
+                var myDoughnutChart = new Chart(ctx).Doughnut(pie_data,
+                    {
+                        responsive: true,
+                        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %> Gb"
+                    });
+
+
+                // LINE CHART WIDGET
+                var ctx2 = document.getElementById("myLineChart").getContext("2d");
+                var myLineChart = new Chart(ctx2).Line(line_data,
+                    {
+                        responsive: true,
+                        scaleShowGridLines: false,
+                        scaleShowLabels: false,
+                        showScale: false,
+                        pointDot: true,
+                        bezierCurveTension: 0.2,
+                        pointDotStrokeWidth: 1,
+                        pointHitDetectionRadius: 5,
+                        datasetStroke: false,
+                        tooltipTemplate: "<%= value %><%if (label){%> - <%=label%><%}%>"
+                    });
+
+                // BAR CHART ON LINE WIDGET
+                var ctx3 = document.getElementById("myBarChart").getContext("2d");
+                var myBarChart = new Chart(ctx3).Bar(bar_data,
+                    {
+                        responsive: true,
+                        scaleShowGridLines: false,
+                        scaleShowLabels: false,
+                        showScale: false,
+                        pointDot: true,
+                        datasetStroke: false,
+                        tooltipTemplate: "<%= value %><%if (label){%> - <%=label%><%}%>"
+                    });
+
+            });
+        </script>
+    </section>
+</div>

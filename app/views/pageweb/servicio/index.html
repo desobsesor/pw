@@ -1,0 +1,102 @@
+
+<div class="container" >
+    <script type="text/javascript-lazy" src="./public/js/jquery.js"></script>
+    <script type="text/javascript-lazy" src="./public/js/jquery.form.min.js"></script>
+    <script type="text/javascript-lazy"  src="./public/js/bootstrap-filestyle.js"> </script>
+
+    <section id="title">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <br>
+                    <h1>Servicios</h1>
+                    <p>Servicios ofrecidos en la Fundación Afrocaq.!</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li class="active">Servicios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+        <div class="col-sm-8">
+            <table id="tablaServicios" data-toggle="table" class="table" style="width: 800px;">
+                <thead>
+                    <tr class="alert">
+                        <th style="width: 20%;">Servicio</th>
+                        <th style="width: 40%;">Descripcion</th>
+                        <th style="width: 10%;">Activo</th>
+                        <th style="width: 10%;">Domicilio</th>
+                        <th style="width: 10%;">Valor</th>
+                        <th style="width: 10%;">Imagen</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <tr ng-repeat="servicio in servicios" ng-click="selectServicio(servicio)">
+                        <td style="width: 20%;">{{ servicio.servicio}}</td>
+                        <td style="width: 40%;">{{ servicio.descripcion}}</td>
+                        <td style="width: 10%;">{{ servicio.activo}}</td>	
+                        <td style="width: 10%;">{{ servicio.es_domicilio}}</td>	               
+                        <td style="width: 10%;">{{ servicio.valor}}</td>
+                        <td style="width: 10%;"><img src="./public/files/{{servicio.imagen}}" alt="img" /></td>			
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+            <form name="myForm">
+                <div class="form-group">
+                    <input type="text" class="form-control text-left" placeholder="servicio" ng-model="newServicio.servicio" />
+                    <input type="text" class="form-control text-left" placeholder="descripcion" ng-model="newServicio.descripcion" />
+                    <input type="checkbox" class="btn-primary checkbox" ng-model="newServicio.activo" /> Activo
+                    <input type="checkbox" class="btn-primary checkbox" ng-model="newServicio.es_domicilio" /> Es Domicilio
+                    <input type="text" class="form-control text-left" placeholder="valor" ng-model="newServicio.valor" />
+                    <input type="text" class="form-control text-left" placeholder="imagen" ng-model="newServicio.imagen" />
+                </div>
+
+                <!-- Acciones que podemos realizar en el formulario -->
+                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarServicio()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarServicio(newServicio)" ng-disabled="!newServicio.servicio || !newServicio.descripcion || !selected">Modificar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarServicio(newServicio)" ng-disabled="!newServicio.servicio || !newServicio.descripcion || !selected">Borrar</button>
+            </form>
+
+
+            <form id="uploadForms" 
+                  enctype="multipart/form-data"
+                  action="/api/photo" 
+                  method="post">
+                <input type="file" name="userPhoto" data-input="false" class="filestyle" />
+                <input type="submit" value="Cargar Imagen" name="sub" />
+            </form> 
+
+        </div>
+
+        <script type="text/javascript-lazy" >
+            $("#uploadForms").submit(function () {
+            $(this).ajaxSubmit({
+            error: function (xhr) {
+            status("Error: " + xhr.status);
+            },
+            success: function (response) {
+            call($.trim(response));
+            //mainControllerServicio.modificarImagenServicio(mainControllerServicio.newServicio, $.trim(response));
+            console.log(response);
+            }
+            });
+            return false;
+            });
+
+            function call(fileName) {
+            var scope = angular.element(document.getElementById('principal')).scope();
+            scope.$apply(function(){
+            scope.msg = scope.msg + ' I am the newly addded message from the outside of the controller.';
+            })
+            scope.modificarImagenServicio(scope.newServicio,fileName);
+            }
+        </script>  
+    </div>
+</div>
+<br>
