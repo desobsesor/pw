@@ -18,7 +18,7 @@
         "jquery-editable-select": "2.2.5",
         "mdmenu": "0.0.2",
         "method-override": "3.0.0",
-        "mongoose": "5.7.5",
+        "mongoose": "5.8.1",
         "multer": "1.4.1",
         "multer-gridfs-storage": "3.2.3",
         "nexmo": "2.4.0",
