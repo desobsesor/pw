@@ -8,4 +8,5 @@
 /public/plugins/ui
 /.vscode
 /.idea
+package-lock.json
 
